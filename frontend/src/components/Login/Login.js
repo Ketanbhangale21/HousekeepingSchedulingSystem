@@ -70,6 +70,7 @@ const LoginComponent = () => {
       if (user.password === password) {
         if (user.email === "admin@example.com") {
           setAdminStatus(true);
+          // console.log(adminStatus);
         }
         const queryString = location.search; // returns the query string from the current url
         let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
@@ -81,8 +82,9 @@ const LoginComponent = () => {
         // JWT token is the popular token generation library
         let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
         sessionStorage.setItem("user-token", token);
-        navigate(strReturnUrl, { state: { prop1: adminStatus } });
-        // navigate("/dashboard", { state: { prop1: adminStatus } });
+        console.log(strReturnUrl);
+        // navigate(strReturnUrl, { state: { prop1: adminStatus } });
+        navigate("/dashboard", { state: { prop1: adminStatus } });
       } else {
         setError("Incorrect Password");
       }

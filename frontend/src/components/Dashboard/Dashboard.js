@@ -9,7 +9,7 @@ const Dashboard = () => {
   const { prop1 } = location.state;
   function login() {
     navigate("/");
-    // alert(prop1);
+    alert(prop1);
   }
   return (
     <div>
