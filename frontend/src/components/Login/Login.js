@@ -20,7 +20,6 @@ const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [errorField, setError] = useState("");
   const [userData, setUserData] = useState([]);
-  const [adminStatus, setAdminStatus] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -83,7 +82,6 @@ const LoginComponent = () => {
         sessionStorage.setItem("user-token", token);
         console.log(sessionStorage.getItem("UserType"));
         navigate(strReturnUrl);
-        // navigate("/dashboard", { state: { prop1: adminStatus } });
       } else {
         setError("Incorrect Password");
       }
@@ -124,10 +122,12 @@ const LoginComponent = () => {
             <button type="button" onClick={handleLogin}>
               Login
             </button>
-            <Link to="/ForgotPassword" className="mb-3 mt-3">
+            <Link to="/forgotpassword" className="mb-3 mt-3">
               Forgot Password
             </Link>
-            <label>Not a Member? SignUp</label>
+            <label>
+              Not a Member? <Link to="/registration">SignUp</Link>{" "}
+            </label>
             {errorField && <div className="error-message">{errorField}</div>}
           </form>
         </div>
