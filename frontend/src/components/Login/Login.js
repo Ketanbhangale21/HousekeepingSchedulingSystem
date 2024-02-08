@@ -68,10 +68,9 @@ const LoginComponent = () => {
     } else {
       if (user.password === password) {
         if (user.email === "admin@example.com") {
-          console.log(user.email);
-          localStorage.setItem("UserType", "Admin");
-          console.log(localStorage.getItem("UserType"));
+          sessionStorage.setItem("UserType", "Admin");
         } else {
+          sessionStorage.setItem("UserType", "Student");
         }
         const queryString = location.search; // returns the query string from the current url
         let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
@@ -82,6 +81,7 @@ const LoginComponent = () => {
         // JWT token is the popular token generation library
         let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
         sessionStorage.setItem("user-token", token);
+        console.log(sessionStorage.getItem("UserType"));
         navigate(strReturnUrl);
         // navigate("/dashboard", { state: { prop1: adminStatus } });
       } else {

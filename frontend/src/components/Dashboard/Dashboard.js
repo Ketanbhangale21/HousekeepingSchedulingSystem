@@ -9,14 +9,14 @@ const Dashboard = () => {
   const [prop1, setProp1] = useState(Boolean);
   useEffect(() => {
     try {
-      setProp1(localStorage.getItem("UserType"));
+      setProp1(sessionStorage.getItem("UserType"));
     } catch (error) {
       console.log("Error:", error);
     }
   }, []);
   function login() {
     sessionStorage.removeItem("user-token");
-    console.log(prop1);
+    sessionStorage.removeItem("UserType");
     navigate("/");
   }
   return (
@@ -30,7 +30,7 @@ const Dashboard = () => {
           <i className="bi bi-tv"></i>
           Dashboard
         </div>
-        {!prop1 && (
+        {prop1 === "Student" && (
           <div>
             <div className="sidebar-item ">
               <i className="bi bi-telegram"></i>My Requests
@@ -46,7 +46,7 @@ const Dashboard = () => {
             </div>
           </div>
         )}
-        {prop1 && (
+        {prop1 === "Admin" && (
           <div>
             <div className="sidebar-item ">
               <i className="bi bi-telegram"></i>Requests
