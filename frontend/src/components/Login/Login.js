@@ -16,7 +16,6 @@ const LoginComponent = () => {
 
     fetchData();
   }, []);
-
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorField, setError] = useState("");
@@ -69,22 +68,22 @@ const LoginComponent = () => {
     } else {
       if (user.password === password) {
         if (user.email === "admin@example.com") {
-          setAdminStatus(true);
-          // console.log(adminStatus);
+          console.log(user.email);
+          localStorage.setItem("UserType", "Admin");
+          console.log(localStorage.getItem("UserType"));
+        } else {
         }
         const queryString = location.search; // returns the query string from the current url
         let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
-
-        if (strReturnUrl == null) {
-          strReturnUrl = "/";
+        if (strReturnUrl === null) {
+          strReturnUrl = "/dashboard";
         }
         // In real-time apps, we will get the token from the server
         // JWT token is the popular token generation library
         let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
         sessionStorage.setItem("user-token", token);
-        console.log(strReturnUrl);
-        // navigate(strReturnUrl, { state: { prop1: adminStatus } });
-        navigate("/dashboard", { state: { prop1: adminStatus } });
+        navigate(strReturnUrl);
+        // navigate("/dashboard", { state: { prop1: adminStatus } });
       } else {
         setError("Incorrect Password");
       }

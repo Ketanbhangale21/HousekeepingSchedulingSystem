@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LoginComponent />}></Route>
-          <Route path="/login" element={<LoginComponent />}></Route>
+          {/* <Route path="/login" element={<LoginComponent />}></Route> */}
 
           <Route
             path="/dashboard"

@@ -11,7 +11,7 @@ const ProtectedRoute = (props) => {
 
     if (!userToken || userToken === "undefined") {
       setIsLoggedIn(false);
-      return navigate("/login?returnUrl=" + props.returnUrl);
+      return navigate("/?returnUrl=" + props.returnUrl);
     }
     setIsLoggedIn(true);
   };

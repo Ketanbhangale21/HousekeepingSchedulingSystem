@@ -1,15 +1,23 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { prop1 } = location.state;
+  // const location = useLocation();
+  const [prop1, setProp1] = useState(Boolean);
+  useEffect(() => {
+    try {
+      setProp1(localStorage.getItem("UserType"));
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }, []);
   function login() {
+    sessionStorage.removeItem("user-token");
+    console.log(prop1);
     navigate("/");
-    alert(prop1);
   }
   return (
     <div>
