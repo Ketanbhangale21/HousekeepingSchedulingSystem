@@ -26,7 +26,8 @@ const Staff = () => {
   const fetchHousekeepers = async () => {
     try {
       const response = await axios.get("http://localhost:3005/api/staff");
-      setHousekeepers(response.data);
+      const sortedHousekeepers = response.data.sort((a, b) => a.hid - b.hid);
+      setHousekeepers(sortedHousekeepers);
     } catch (error) {
       console.error("Error fetching housekeepers:", error);
     }
@@ -52,20 +53,22 @@ const Staff = () => {
         .then((resData) => {
           alert("updated");
         });
+      fetchHousekeepers();
     } catch {
       console.error("Error updating housekeeper");
     }
   };
-  const handleDelete = (id) => {
-    window.confirm("Do you want to delete this housekeeper");
-
-    try {
-      axios.delete(`http://localhost:3005/api/staff/remove/${id}`);
-      setHousekeepers(
-        housekeepers.filter((housekeeper) => housekeeper.hid !== id)
-      );
-    } catch (error) {
-      console.error("Error deleting housekeeper:", error);
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm("Do you want to delete this housekeeper?");
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:3005/api/staff/remove/${id}`);
+        setHousekeepers(
+          housekeepers.filter((housekeeper) => housekeeper.hid !== id)
+        );
+      } catch (error) {
+        console.error("Error deleting housekeeper:", error);
+      }
     }
   };
   const handleView = (housekeeper) => {
@@ -86,6 +89,7 @@ const Staff = () => {
           <table className="housekeepers-table">
             <thead>
               <tr>
+                <th>Hid</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Current Status</th>
@@ -95,6 +99,7 @@ const Staff = () => {
             <tbody>
               {currentRecords.map((housekeeper) => (
                 <tr key={housekeeper._id}>
+                  <td>{housekeeper.hid}</td>
                   <td>
                     {housekeeper.fname} {housekeeper.lname}
                   </td>
@@ -102,12 +107,6 @@ const Staff = () => {
                   <td>{housekeeper.email}</td>
                   <td>Active</td>
                   <td>
-                    {/* <button
-                      className="viewid"
-                      
-                    >
-                      View
-                    </button> */}
                     <i
                       class="bi bi-plus-square"
                       style={{
