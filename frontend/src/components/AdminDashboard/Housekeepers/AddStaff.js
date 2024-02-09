@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import "./registration.css";
+import "./addStaff.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const AddStudent = () => {
+const AddStaff = () => {
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get("http://localhost:3005/api/students");
+        setHousekeepers(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,16 +25,13 @@ const AddStudent = () => {
   const [city, setCity] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
+  const [housekeepers, setHousekeepers] = useState([]);
   const [errors, setErrors] = useState("");
-  const [newID, setNewid] = useState();
-  const [floorno, setNewfloor] = useState();
-  const [roomno, setNewroom] = useState();
 
   const generateUniqueID = async () => {
-    setNewid(Math.floor(100000 + Math.random() * 900000));
-    setNewfloor(Math.floor(Math.random() * 5) + 1);
-    setNewroom(Math.floor(Math.random() * 10) + 1);
+    return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit random number
   };
+
   const handleRegistraion = async () => {
     if (
       !firstName ||
@@ -50,25 +58,24 @@ const AddStudent = () => {
       setErrors("Please enter a valid phone number (only numbers are allowed)");
       return;
     }
-
     try {
-      await generateUniqueID();
+      const newhid = await generateUniqueID();
       let dataObj = {};
-      dataObj.stdid = newID;
+      dataObj.hid = newhid;
       dataObj.fname = firstName;
       dataObj.lname = lastName;
       dataObj.email = email;
       dataObj.country = country;
       dataObj.state = state;
+      dataObj.phone = phoneNumber;
       dataObj.city = city;
-      dataObj.phoneNumber = phoneNumber;
       dataObj.gender = gender;
-      dataObj.roomno = roomno;
-      dataObj.floorno = floorno;
-
-      await axios.post("http://localhost:3005/api/students", dataObj);
-      alert("Student Registered Successfully");
-
+      await axios
+        .post("http://localhost:3005/api/staff", dataObj)
+        .then((resData) => {
+          alert("Record Added");
+        });
+      // Reset form fields after successful registration
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -78,19 +85,19 @@ const AddStudent = () => {
       setPhoneNumber("");
       setGender("");
     } catch (error) {
-      console.error("Error registering student:", error);
-      alert("Error registering student. Please try again later.");
+      console.error("Error registering staff:", error);
+      alert("Error registering staff. Please try again later.");
     }
   };
 
   return (
     <div className="container">
       <div className="img">
-        <img src="/user.png" alt="" style={{ width: "400px" }} />
+        <img src="/cleaning.avif" alt="" />
       </div>
       <div className="form-container">
         <form className="form">
-          <h2>Student Registration</h2>
+          <h2>Housekeeper Registration</h2>
           <div className="input-name">
             <FaUser className="icon" />
             <input
@@ -192,9 +199,9 @@ const AddStudent = () => {
                 type="radio"
                 name="gender"
                 value="female"
-                checked={gender === "female"}
+                checked={gender === "Female"}
                 onChange={() => {
-                  setGender("female");
+                  setGender("Female");
                   setErrors("");
                 }}
               />
@@ -217,20 +224,18 @@ const AddStudent = () => {
             </label>
           </div>
 
-          <button type="button" onClick={handleRegistraion} className="btn">
+          <button
+            type="button"
+            onClick={() => handleRegistraion()}
+            className="btn"
+          >
             Register
           </button>
-          <p className="mt-2">
-            Already a Member?
-            <Link to="/" className="mb-3 mt-3 links">
-              Login
-            </Link>
-          </p>
-          {errors && <div className="errorMessage">{errors}</div>}
         </form>
+        {errors && <div className="errorMessage">{errors}</div>}
       </div>
     </div>
   );
 };
 
-export default AddStudent;
+export default AddStaff;

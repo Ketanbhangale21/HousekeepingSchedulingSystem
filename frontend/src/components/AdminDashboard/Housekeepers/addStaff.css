@@ -70,7 +70,7 @@ h2 {
 }
 .btn {
   border-radius: 20px;
-  color: #fef1c7;
+  color: #ffc107;
   font-size: 15px;
   font-weight: bold;
   margin: 0 !important;
@@ -95,9 +95,7 @@ h2 {
   box-shadow: none;
 }
 .img {
-  /* max-width: 100%; */
-  height: 100px;
-  width: 100px;
+  max-width: 100%;
   padding-top: 28px;
   padding-left: 28px;
   margin-right: 28px;

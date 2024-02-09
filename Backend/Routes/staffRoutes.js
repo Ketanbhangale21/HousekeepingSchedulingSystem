@@ -22,7 +22,7 @@ router.get("/staff/:id", async function (req, res) {
     if (!data) return res.status(404).send(`No record with ${id}`);
     else {
       res.send(data);
-      console.table(data);
+      // console.table(data);
     }
   } catch (error) {
     res.status(500).send(error);
@@ -49,6 +49,7 @@ router.post(
     }
     try {
       const newStaff = new StaffModel(req.body);
+      console.log(newStaff);
       const createdStaff = await newStaff.save();
       res.status(201).json({
         message: "Staff created successfully",
@@ -65,7 +66,6 @@ router.post(
 router.put(
   "/staff",
   [
-    body("hid").notEmpty().withMessage("Staff ID is required"),
     body("fname").notEmpty().withMessage("First Name is required"),
     body("lname").notEmpty().withMessage("Last Name is required"),
     body("email").isEmail().withMessage("Invalid email format"),
@@ -73,7 +73,6 @@ router.put(
     body("state").notEmpty().withMessage("State is required"),
     body("city").notEmpty().withMessage("City is required"),
     body("phone").isNumeric().withMessage("Phone number must be numeric"),
-    body("status").notEmpty().withMessage("Status is required"),
   ],
   async function (req, res) {
     const errors = validationResult(req);
@@ -82,7 +81,9 @@ router.put(
     }
     try {
       let staffid = req.body.hid;
+      console.log(staffid);
       let staff = await StaffModel.findOne({ hid: staffid });
+      console.log(staff);
       if (!staff) {
         return res
           .status(404)
@@ -95,7 +96,7 @@ router.put(
         staff.state = req.body.state;
         staff.city = req.body.city;
         staff.phone = req.body.phone;
-        staff.status = req.body.status;
+        staff.gender = req.body.gender;
         const updatedStaff = await staff.save();
         res.status(200).json({
           message: "Staff updated successfully",

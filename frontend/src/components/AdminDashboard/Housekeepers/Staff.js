@@ -5,9 +5,9 @@ import "./staff.css";
 const Staff = () => {
   const [housekeepers, setHousekeepers] = useState([]);
   const [selectedHousekeeper, setSelectedHousekeeper] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const [details, setDetails] = useState(false);
   const [editable, setEditable] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -46,7 +46,6 @@ const Staff = () => {
       phone: document.getElementById("phone").value,
       gender: document.getElementById("gender").value,
     };
-    console.log(updatedHousekeeper);
     try {
       axios
         .put("http://localhost:3005/api/staff/", updatedHousekeeper)

@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var staffSchema = new Schema(
   {
-    hid: Number,
+    hid: String,
     fname: String,
     lname: String,
     email: String,

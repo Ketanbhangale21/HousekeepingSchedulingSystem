@@ -1,24 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Staff from "../AdminDashboard/Housekeepers/Staff";
+import AddStaff from "../AdminDashboard/Housekeepers/AddStaff";
+import Students from "../AdminDashboard/Students/Students";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [prop1, setProp1] = useState(Boolean);
-  const [displayStatus, setDisplayStatus] = useState(true);
-  const [displayStaff, setDisplayStaff] = useState(false);
-  const handleHousekeeperClick = () => {
-    setDisplayStatus(false);
-    setDisplayStaff(false);
-    setTimeout(() => setDisplayStaff(true), 0);
-    // console.log(displayStaff);
-  };
-  const handleDashboardClick = () => {
-    setDisplayStaff(false);
-    setDisplayStatus(false);
-    setTimeout(() => setDisplayStatus(true), 0);
+  const [prop1, setProp1] = useState("");
+  const [route, setRoute] = useState("");
+
+  const handleRoutes = (e) => {
+    setRoute("");
+    setTimeout(() => setRoute(e), 0);
   };
   useEffect(() => {
     try {
@@ -32,6 +27,7 @@ const Dashboard = () => {
     sessionStorage.removeItem("UserType");
     navigate("/");
   }
+
   return (
     <div>
       <div className="header">
@@ -40,7 +36,10 @@ const Dashboard = () => {
       </div>
       <div className="mainContainer">
         <div className="sidebar ">
-          <div className="sidebar-item " onClick={handleDashboardClick}>
+          <div
+            className="sidebar-item "
+            onClick={() => handleRoutes("dashboard")}
+          >
             <i className="bi bi-tv"></i>
             Dashboard
           </div>
@@ -65,10 +64,16 @@ const Dashboard = () => {
               <div className="sidebar-item ">
                 <i className="bi bi-telegram"></i>Requests
               </div>
-              <div className="sidebar-item" onClick={handleHousekeeperClick}>
+              <div
+                className="sidebar-item"
+                onClick={() => handleRoutes("housekeepers")}
+              >
                 <i className="bi bi-person-circle"></i>Housekeepers
               </div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("students")}
+              >
                 <i className="bi bi-person-bounding-box"></i>Students
               </div>
               <div className="sidebar-item ">
@@ -84,14 +89,32 @@ const Dashboard = () => {
         {/* MAIN CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
 
         <div className="mainContent">
-          {displayStatus && (
+          {route === "dashboard" && (
             <div className="maindashboard">
-              <div>{/* PLACE YOUR DASHBOARD CODE HERE  */}</div>
+              <div>
+                {/* PLACE YOUR DASHBOARD CODE HERE  */}this is dashboard
+              </div>
             </div>
           )}
           {/*  Display the appropriate content based on which tab is selected. */}
           {/* AdminTabs */}
-          {displayStaff && <Staff />}
+          {route === "housekeepers" && (
+            <div>
+              <Staff />
+              {
+                <div className="addStaff">
+                  <button
+                    className="btn btn-success p-2 addStaffbutton"
+                    onClick={() => handleRoutes("addstaff")}
+                  >
+                    Add Staff
+                  </button>
+                </div>
+              }
+            </div>
+          )}
+          {route === "addstaff" && <AddStaff />}
+          {route === "students" && <Students />}
         </div>
       </div>
     </div>

@@ -13,7 +13,6 @@ const LoginComponent = () => {
         console.error("Error fetching data:", error);
       }
     }
-
     fetchData();
   }, []);
   const [password, setPassword] = useState("");
@@ -80,7 +79,6 @@ const LoginComponent = () => {
         // JWT token is the popular token generation library
         let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
         sessionStorage.setItem("user-token", token);
-        console.log(sessionStorage.getItem("UserType"));
         navigate(strReturnUrl);
       } else {
         setError("Incorrect Password");
@@ -126,12 +124,14 @@ const LoginComponent = () => {
               Forgot Password
             </Link>
             <label>
-              Not a Member?{" "}
+              Not a Member?
               <Link to="/registration" className="mb-3 mt-3 links">
                 SignUp
-              </Link>{" "}
+              </Link>
             </label>
-            {errorField && <div className="error-message">{errorField}</div>}
+            {errorField && (
+              <div className="error-message text-danger">{errorField}</div>
+            )}
           </form>
         </div>
         <div className="overlay-container">
