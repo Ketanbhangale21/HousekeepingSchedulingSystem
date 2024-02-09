@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./staff.css";
-// import "profile1.png";
 
 const Staff = () => {
   const [housekeepers, setHousekeepers] = useState([]);
@@ -9,7 +8,7 @@ const Staff = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [details, setDetails] = useState(false);
   const [editable, setEditable] = useState(false);
-  const recordsPerPage = 8;
+  const recordsPerPage = 5;
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = housekeepers.slice(
@@ -78,7 +77,6 @@ const Staff = () => {
   };
   const editSelected = () => {
     setEditable(true);
-    // console.log(selectedHousekeeper);
   };
   return (
     <div className="maincontainer">
@@ -170,6 +168,13 @@ const Staff = () => {
                 alt="Housekeeper Avatar"
                 className="avatar"
               />
+              {selectedHousekeeper.gender === "Male" && (
+                <img
+                  src="profile2.png"
+                  alt="Housekeeper Avatar"
+                  className="avatar"
+                />
+              )}
             </div>
             <div className="profile-details">
               <div className="detail">

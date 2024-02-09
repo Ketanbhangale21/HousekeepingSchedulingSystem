@@ -84,7 +84,11 @@ const Dashboard = () => {
         {/* MAIN CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
 
         <div className="mainContent">
-          {displayStatus && <div>Welcome to Admin Dashboard!</div>}
+          {displayStatus && (
+            <div className="maindashboard">
+              <div>{/* PLACE YOUR DASHBOARD CODE HERE  */}</div>
+            </div>
+          )}
           {/*  Display the appropriate content based on which tab is selected. */}
           {/* AdminTabs */}
           {displayStaff && <Staff />}
