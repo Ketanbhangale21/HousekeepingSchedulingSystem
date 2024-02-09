@@ -92,8 +92,8 @@ const LoginComponent = () => {
     <div className="outer-container">
       <div className="container">
         <div className="form-container log-in-container">
-          <form className="form">
-            <h1 style={{ color: "#00796b" }}>Login</h1>
+          <form className="input-form">
+            <h1 className="heading">Login</h1>
             <div className="formgroup">
               <input
                 className="input"
@@ -119,14 +119,17 @@ const LoginComponent = () => {
                 )}
               </p>
             </div>
-            <button type="button" onClick={handleLogin}>
+            <button type="button" className="submit" onClick={handleLogin}>
               Login
             </button>
-            <Link to="/forgotpassword" className="mb-3 mt-3">
+            <Link to="/forgotpassword" className="mb-3 mt-3 links">
               Forgot Password
             </Link>
             <label>
-              Not a Member? <Link to="/registration">SignUp</Link>{" "}
+              Not a Member?{" "}
+              <Link to="/registration" className="mb-3 mt-3 links">
+                SignUp
+              </Link>{" "}
             </label>
             {errorField && <div className="error-message">{errorField}</div>}
           </form>
@@ -134,8 +137,8 @@ const LoginComponent = () => {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-right">
-              <h1>HouseKeeper Scheduling system</h1>
-              <p style={{ color: "#ffc107" }}>
+              <h1 className="heading2">HouseKeeper Scheduling system</h1>
+              <p className="section">
                 This is the place where you can schedule your comfortable time
                 for cleaning purposes for HouseKeeper.
               </p>

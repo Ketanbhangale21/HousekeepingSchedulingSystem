@@ -31,13 +31,12 @@
 }
 .sidebar {
   width: 230px;
+  min-width: 230px;
+  max-width: 230px;
   /* background-color: #f2f2f2; */
   margin: 10px 0;
   padding: 20px;
   height: calc(100vh - 160px);
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
   border-right: 1px solid #e0e2e5;
 }
 .bi {
@@ -54,8 +53,18 @@
   cursor: pointer;
   font-size: 15px;
   text-align: start;
+  flex-grow: 1;
+  flex-basis: 25%;
 }
 
 .sidebar-item:hover {
   background-color: #e6e6e6;
+}
+.mainContainer {
+  display: flex;
+}
+.mainContent {
+  flex-grow: 3;
+  flex-basis: 75%;
+  margin: 5px;
 }

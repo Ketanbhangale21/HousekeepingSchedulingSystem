@@ -5,11 +5,12 @@
   margin: 0;
   padding: 0;
 }
-h1 {
+.heading {
   font-weight: bold;
   margin: 0;
+  color: #00796b;
 }
-p {
+.section {
   font-size: 15px;
   font-weight: 100;
   line-height: 20px;
@@ -17,18 +18,14 @@ p {
   margin: 20px 0 30px;
 }
 
-span {
-  font-size: 15px;
-}
-
-.form-container Link {
-  color: #333;
+.links {
+  color: #19725d;
   font-size: 15px;
   text-decoration: none;
   margin: 15px 0;
 }
 
-form {
+.input-form {
   background-color: #f0f0f0;
   display: flex;
   align-items: center;
@@ -112,26 +109,6 @@ form {
   right: 0;
 }
 
-.social-container {
-  margin: 50px 0;
-}
-
-.social-container a {
-  border: 1px solid #dddddd;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  height: 40px;
-  width: 40px;
-}
-
-.error-message {
-  color: #ff0000;
-  margin-top: 10px;
-  font-size: 15px;
-}
 .input {
   font-size: 15px;
   background-color: #eee;
@@ -146,9 +123,9 @@ form {
   /* border-color: #009688; */
   border: 1px solid #965000 !important;
 }
-button {
+.submit {
   border-radius: 20px;
-  color: #ffc107;
+  color: #fef1c7;
   font-size: 15px;
   font-weight: bold;
   margin-top: 5px;
@@ -162,10 +139,10 @@ button {
   transform: scale(1.012);
   transition: 0.21s;
 }
-button:enabled {
+.submit:enabled {
   background-color: #009688;
 }
-button:enabled:hover {
+.submit:enabled:hover {
   /* perspective: -1000px; */
   transform: scale(1);
   background-color: #00897b;
@@ -177,6 +154,8 @@ button:enabled:hover {
 .error-message {
   position: absolute;
   bottom: 50px;
+  font-size: 15px;
+  color: #00796b;
 }
 .formgroup {
   width: 100%;
@@ -190,4 +169,8 @@ button:enabled:hover {
 }
 .bi {
   font-size: 20px;
+}
+
+.heading2 {
+  font-weight: bold;
 }
