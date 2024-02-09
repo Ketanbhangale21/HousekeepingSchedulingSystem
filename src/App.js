@@ -1,11 +1,11 @@
 //import BankApp from './Components/BankApp'; 
-import ForgetPassword from './ForgetPassword';
+import ForgotPassword from './ForgotPassword';
 
 function App() 
 {      
       return(
         <>
-             <ForgetPassword  />
+             <ForgotPassword  />
         </>
         );
 }
