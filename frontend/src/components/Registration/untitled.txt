@@ -2,6 +2,8 @@ import React,{useState} from "react";
 import './stylesheets.css';
 
 
+
+
 const  RegistrationForm = () => {
     const [studentId, setstudentId] = useState('');
     const [firstName, setFirstName]=useState('');
@@ -14,6 +16,20 @@ const  RegistrationForm = () => {
     const [city , setCity] = useState('');
     const [phoneNumber , setPhoneNumber]=useState('');
     const [gender, setGender] = useState('');
+    const [secquestion, setSecQuestion] = useState("");
+    const [fieldsEmpty, setFieldsEmpty] = useState("");
+    const [answer, setAnswer] = useState("");
+
+    const securityQuestions = [
+        "What is your mother's maiden name?",
+        "What is the name of your first pet?",
+        "What is your favorite movie?",
+        "What city were you born in?",
+        "What is the name of your elementary school?",
+      ];
+    
+
+
     
     
 
@@ -21,7 +37,7 @@ const  RegistrationForm = () => {
 
 
         if(!firstName || !lastName || !email ||  !password  || !retypepassword ||
-            !country || !state || !city || !phoneNumber || !gender){
+            !country || !state || !city || !phoneNumber || !gender || !secquestion || !fieldsEmpty  ||!answer){
             alert('All fields are required');
             return;
         }
@@ -63,6 +79,7 @@ const  RegistrationForm = () => {
                 <div className="content">
                   <div className="input-name"  >
                 <label>First Name:
+                    <br/>
                     <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="name"/>
                 </label>
                 </div>
@@ -107,6 +124,7 @@ const  RegistrationForm = () => {
                 </div>
                 <div className="input-name"  >
                 <label>Phone Number:
+                    <br/>
                     <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className="name"/>
                 </label>
                 </div>
@@ -120,6 +138,51 @@ const  RegistrationForm = () => {
         <option value="other">Other</option>
       </select>
     </div>
+    <div className="form-group">
+            <label htmlFor="Security-question">
+              Choose a Security Question
+            </label>
+            <select
+              className="secQuestion"
+              id="Security-question"
+              name="Security-question"
+              value={secquestion}
+              onChange={(e) => {
+                setSecQuestion(e.target.value);
+                setFieldsEmpty("");
+              }}
+            >
+              <option value="">Select a security question</option>
+              {securityQuestions.map((question, index) => (
+                <option
+                  style={{ maxWidth: "200px" }}
+                  key={index}
+                  value={question}
+                >
+                  {question}
+                </option>
+              ))}{" "}
+            </select>
+          </div>
+          {secquestion && (
+            <div className="form-group">
+              <label htmlFor="Answer">Answer</label>
+              <input
+                type="text"
+                id="Answer"
+                name="Answer"
+                value={answer}
+                onChange={(e) => {
+                  setAnswer(e.target.value);
+                  setFieldsEmpty("");
+                }}
+                autoComplete="off"
+              />
+            </div>
+          )}
+
+
+    
                 <div className="btn-container">
                 <button type="button" onClick={handleRegistraion}  className="btn" >
                     Register

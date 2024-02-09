@@ -131,3 +131,10 @@ padding-bottom:15px;
     width: 768px;
     height: 100vh;
   }
+  .form-group{
+    padding:0 20px 0 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+
+  }
