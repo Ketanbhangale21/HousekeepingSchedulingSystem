@@ -17,7 +17,7 @@ function Feedback(){
     let resultArray = DataArray.map((item) => {
         return <tr>
             <td>   {item.Fid}  </td>
-            <td>   {item.Req_Id}  </td>
+            <td>   {item.Req_Id}  </td>  
             <td>   {item.SName}  </td>
             <td>   {item.Fb}  </td>
             <td>   {item.Ratings}  </td>
