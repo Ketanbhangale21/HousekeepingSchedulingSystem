@@ -161,10 +161,10 @@
   width: 100%;
   position: relative;
 }
-.showPassword {
+.showPassword1 {
   position: absolute;
   right: 5px;
-  top: 5px;
+  top: 20px;
   font-size: 20px;
 }
 .bi {

@@ -68,3 +68,60 @@
   flex-basis: 75%;
   margin: 5px;
 }
+.main__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70px;
+  padding: 25px;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 5px 5px 13px black, -5px -5px 13px #ffffff;
+}
+
+.card_inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card_inner > span {
+  font-size: 25px;
+}
+
+.container2 {
+  margin-top: none;
+  width: 1100px;
+}
+
+.c1 {
+  background-color: #ebb28b;
+  font-weight: bold;
+}
+.c2 {
+  background-color: #91ca87;
+  font-weight: bold;
+}
+.c3 {
+  background-color: #d0ce9a;
+  font-weight: bold;
+}
+.c4 {
+  background-color: #c02626;
+  font-weight: bold;
+}
+
+/* Add this to your Dashboard.css file */
+.carousel-inner .item img {
+  max-width: 100%; /* Adjust the width as needed */
+  max-height: 100%; /* Adjust the height as needed */
+  display: block;
+  margin: auto; /* Align center */
+}

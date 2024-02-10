@@ -142,7 +142,7 @@ const Staff = () => {
                       onClick={() => handlePageChange(index + 1)}
                       className={currentPage === index + 1 ? "active" : ""}
                     >
-                      {index + 1}
+                      {index + 0}
                     </li>
                   )
                 )}

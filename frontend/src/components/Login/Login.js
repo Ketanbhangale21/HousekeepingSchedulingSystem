@@ -109,7 +109,7 @@ const LoginComponent = () => {
                 value={password}
                 onChange={handlePasswordChange}
               />
-              <p className="showPassword" onClick={togglePasswordVisibility}>
+              <p className="showPassword1" onClick={togglePasswordVisibility}>
                 {showPassword ? (
                   <i class="bi bi-eye-slash"></i>
                 ) : (
@@ -120,12 +120,18 @@ const LoginComponent = () => {
             <button type="button" className="submit" onClick={handleLogin}>
               Login
             </button>
-            <Link to="/forgotpassword" className="mb-3 mt-3 links">
+            <Link
+              to="/forgotpassword"
+              className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            >
               Forgot Password
             </Link>
             <label>
               Not a Member?
-              <Link to="/registration" className="mb-3 mt-3 links">
+              <Link
+                to="/registration"
+                className="mb-3 mt-3 link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >
                 SignUp
               </Link>
             </label>
