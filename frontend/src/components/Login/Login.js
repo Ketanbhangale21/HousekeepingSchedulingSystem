@@ -143,10 +143,10 @@ const LoginComponent = () => {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-right">
-              <h1 className="heading2">HouseKeeper Scheduling system</h1>
+              <h1 className="heading2">HomeCare Pro</h1>
               <p className="section">
                 This is the place where you can schedule your comfortable time
-                for cleaning purposes for HouseKeeper.
+                for cleaning purpose for HouseKeeper.
               </p>
             </div>
           </div>

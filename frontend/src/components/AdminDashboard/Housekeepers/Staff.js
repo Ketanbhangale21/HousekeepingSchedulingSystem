@@ -33,6 +33,7 @@ const Staff = () => {
     }
   };
   const handleUpdate = () => {
+    setEditable(!editable);
     // Perform update operation with edited housekeeper data
     const updatedHousekeeper = {
       ...selectedHousekeeper,
@@ -52,7 +53,7 @@ const Staff = () => {
         .then((resData) => {
           alert("updated");
         });
-      fetchHousekeepers();
+      setSelectedHousekeeper(updatedHousekeeper);
     } catch {
       console.error("Error updating housekeeper");
     }
@@ -142,7 +143,7 @@ const Staff = () => {
                       onClick={() => handlePageChange(index + 1)}
                       className={currentPage === index + 1 ? "active" : ""}
                     >
-                      {index + 0}
+                      {index + 1}
                     </li>
                   )
                 )}
@@ -161,12 +162,13 @@ const Staff = () => {
         <div className="innercontainer">
           <div className="profile-card">
             <div className="profile-header">
-              <img
-                src="profile1.png"
-                alt="Housekeeper Avatar"
-                className="avatar"
-              />
-              {selectedHousekeeper.gender === "Male" && (
+              {selectedHousekeeper.gender === "Female" ? (
+                <img
+                  src="profile1.png"
+                  alt="Housekeeper Avatar"
+                  className="avatar"
+                />
+              ) : (
                 <img
                   src="profile2.png"
                   alt="Housekeeper Avatar"
@@ -205,7 +207,13 @@ const Staff = () => {
                 <span className="label">Gender:</span>
                 <span className="value">{selectedHousekeeper.gender}</span>
               </div>
-              <i class="bi bi-pencil-square" onClick={editSelected}></i>
+              <i
+                className="bi bi-pencil-square"
+                style={{ cursor: "pointer" }}
+                onClick={editSelected}
+              >
+                Edit
+              </i>
             </div>
             {editable && (
               <div className="editHouskeeper">
@@ -312,8 +320,12 @@ const Staff = () => {
               </div>
             )}
           </div>
-          <button onClick={handleBack}>Back</button>
-          <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleBack} className="links">
+            Back
+          </button>
+          <button onClick={handleUpdate} className="links">
+            Update
+          </button>{" "}
         </div>
       )}
     </div>

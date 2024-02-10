@@ -374,7 +374,7 @@ const AddStudent = () => {
             </button>
             <p className="mt-2">
               Already a Member?
-              <Link to="/" className="mb-3 mt-3 links">
+              <Link to="/" className="mb-3 mt-3 loginlink">
                 Login
               </Link>
             </p>
