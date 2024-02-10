@@ -57,6 +57,11 @@ const AddStudent = () => {
     "What city were you born in?",
     "What is the name of your elementary school?",
   ];
+  const isEmailValid = (email) => {
+    const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailValidation.test(email);
+  };
+
   const isPasswordValid = (password) => {
     if (password.length < 8) {
       return {
@@ -90,8 +95,37 @@ const AddStudent = () => {
     }
     return { valid: true };
   };
-
-  const handleRegistraion = async () => {
+  function isValid() {
+    const user = userData.find((user) => user.emailid === email.toLowerCase());
+    const isValidPassword = isPasswordValid(password);
+    if (!email || !password || !repassword) {
+      setErrors("Email and Password are required.");
+      return false;
+    } else if (!isEmailValid(email)) {
+      setErrors("Invalid Email Id");
+      return false;
+    } else if (user) {
+      setErrors("This Email id is already registered !!");
+      return false;
+    } else if (!isValidPassword.valid) {
+      setErrors(isValidPassword.error);
+      return false;
+    } else if (password !== repassword) {
+      setErrors("Passwords should match");
+      return false;
+    } else if (secquestion === "") {
+      setErrors("Please choose a security question");
+      return false;
+    } else if (answer === "") {
+      setErrors("Please provide an answer for security question");
+      return false;
+    } else {
+      return true;
+    }
+  }
+  const handleRegistraion = async (e) => {
+    e.preventDefault();
+    setErrors("");
     if (
       !firstName ||
       !lastName ||
@@ -105,19 +139,9 @@ const AddStudent = () => {
       setErrors("All fields are required");
       return;
     }
-
-    const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailValidation.test(email)) {
-      setErrors("Please enter a valid email address");
+    if (!isValid()) {
       return;
     }
-
-    const PhoneValidation = /^\d+$/;
-    if (!PhoneValidation.test(phoneNumber)) {
-      setErrors("Please enter a valid phone number (only numbers are allowed)");
-      return;
-    }
-
     try {
       await generateUniqueID();
       let dataObj = {};
@@ -128,16 +152,16 @@ const AddStudent = () => {
       dataObj.country = country;
       dataObj.state = state;
       dataObj.city = city;
-      dataObj.phoneNumber = phoneNumber;
+      dataObj.phone = phoneNumber;
       dataObj.secquestion = secquestion;
-      dataObj.answer = answer;
+      dataObj.secanswer = answer;
       dataObj.password = password;
       dataObj.roomno = roomno;
       dataObj.floorno = floorno;
-
+      dataObj.gender = gender;
+      console.log(dataObj);
       await axios.post("http://localhost:3005/api/students", dataObj);
       alert("Student Registered Successfully");
-
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -163,7 +187,7 @@ const AddStudent = () => {
         <div className="img">
           <img src="/user.png" alt="" style={{ width: "400px" }} />
         </div>
-        <div className="form-container">
+        <div className="form-container1">
           <form className="form">
             <div className="input-name">
               <FaUser className="icon" />

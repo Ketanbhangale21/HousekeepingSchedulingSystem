@@ -8,7 +8,7 @@
   display: flex;
   margin-top: 10px;
 }
-.form-container {
+.form-container1 {
   position: absolute;
   top: 30px;
   right: 0;
@@ -114,7 +114,9 @@ h2 {
   position: relative;
   padding-left: 25px;
   display: inline-block;
+  margin-bottom: 0;
   color: black;
+  font-size: 15px !important;
 }
 .radio + .radio {
   margin-left: 20px;
@@ -130,7 +132,7 @@ h2 {
   display: block;
   position: absolute;
   left: 0;
-  top: 7px;
+  top: 2px;
 }
 .radio span:after {
   content: "";

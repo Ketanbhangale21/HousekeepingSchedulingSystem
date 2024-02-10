@@ -68,6 +68,8 @@ const LoginComponent = () => {
         if (user.email === "admin@example.com") {
           sessionStorage.setItem("UserType", "Admin");
         } else {
+          sessionStorage.setItem("UserEmail", email);
+          console.log(sessionStorage.getItem("UserEmail"));
           sessionStorage.setItem("UserType", "Student");
         }
         const queryString = location.search; // returns the query string from the current url
@@ -126,7 +128,7 @@ const LoginComponent = () => {
             >
               Forgot Password
             </Link>
-            <label>
+            <p className="d-inline">
               Not a Member?
               <Link
                 to="/registration"
@@ -134,7 +136,7 @@ const LoginComponent = () => {
               >
                 SignUp
               </Link>
-            </label>
+            </p>
             {errorField && (
               <div className="error-message text-danger">{errorField}</div>
             )}

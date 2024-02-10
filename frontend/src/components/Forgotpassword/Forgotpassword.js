@@ -87,8 +87,8 @@ function ForgotPasswordComponent() {
       return;
     }
     if (secquestion !== "") {
-      if (user.question === secquestion) {
-        if (user.answer === answer) {
+      if (user.secquestion === secquestion) {
+        if (user.secanswer === answer) {
           const isValidPassword = isPasswordValid(password);
           if (!isValidPassword.valid) {
             setFieldsEmpty(isValidPassword.error);
@@ -100,7 +100,8 @@ function ForgotPasswordComponent() {
               email: username,
               password: password,
             };
-            let url = "http://localhost:3005/api/modify/user";
+            console.log(dataObj);
+            let url = "http://localhost:3005/api/students";
             axios.put(url, dataObj).then((resData) => {
               alert("Password Updated successful");
               navigate("/login");

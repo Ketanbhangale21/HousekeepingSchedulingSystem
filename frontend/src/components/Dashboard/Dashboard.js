@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Staff from "../AdminDashboard/Housekeepers/Staff";
 import AddStaff from "../AdminDashboard/Housekeepers/AddStaff";
 import Students from "../AdminDashboard/Students/Students";
+import FeedbackForm from "../StudentDashboard/Feedback/feedback";
+import AdminFeedbackComponent from "../AdminDashboard/Feedback/Feedback";
+import StudentRequest from "../StudentDashboard/MyRequests/StudentRequests";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,6 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     try {
       setProp1(sessionStorage.getItem("UserType"));
+      console.log(sessionStorage.getItem("UserEmail"));
     } catch (error) {
       console.log("Error:", error);
     }
@@ -25,6 +29,7 @@ const Dashboard = () => {
   function login() {
     sessionStorage.removeItem("user-token");
     sessionStorage.removeItem("UserType");
+    sessionStorage.removeItem("UserEmail");
     navigate("/");
   }
 
@@ -45,7 +50,10 @@ const Dashboard = () => {
           </div>
           {prop1 === "Student" && (
             <div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("studentrequest")}
+              >
                 <i className="bi bi-telegram"></i>My Requests
               </div>
               <div className="sidebar-item ">
@@ -54,7 +62,10 @@ const Dashboard = () => {
               <div className="sidebar-item ">
                 <i className="bi bi-person-circle"></i>Profile
               </div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("studentfeedback")}
+              >
                 <i className="bi bi-card-checklist"></i>Feedback
               </div>
             </div>
@@ -76,7 +87,10 @@ const Dashboard = () => {
               >
                 <i className="bi bi-person-bounding-box"></i>Students
               </div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("adminfeedback")}
+              >
                 <i className="bi bi-card-checklist"></i>Feedbacks
               </div>
             </div>
@@ -194,6 +208,9 @@ const Dashboard = () => {
           )}
           {route === "addstaff" && <AddStaff />}
           {route === "students" && <Students />}
+          {route === "studentfeedback" && <FeedbackForm />}
+          {route === "adminfeedback" && <AdminFeedbackComponent />}
+          {route === "studentrequest" && <StudentRequest />}
         </div>
       </div>
     </div>
