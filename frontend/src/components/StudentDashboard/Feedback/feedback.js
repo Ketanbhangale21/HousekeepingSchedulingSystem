@@ -27,11 +27,11 @@ const FeedbackForm = () => {
         );
         const newid = userData[0].stdid;
         setStdid(newid);
-
         if (userData.length > 0) {
           // Get all request IDs associated with the user
-          const userRequestIds = userData.map((user) => user.reqs).flat();
+          const userRequestIds = userData.map((user) => user.reqid).flat();
           setRequestIds(userRequestIds);
+          // console.log(userRequestIds);
         }
       } catch (error) {
         console.error("Error fetching request IDs:", error);
