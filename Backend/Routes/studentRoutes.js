@@ -12,7 +12,6 @@ router.get("/students", async function (req, res) {
       .sort({ stdid: 1 })
       .lean();
     res.send(result);
-    console.table(result);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -32,7 +31,7 @@ router.get(
       if (!data) return res.status(404).send(`No record with ${id}`);
       else {
         res.send(data);
-        console.table(data);
+        // console.table(data);
       }
     } catch (error) {
       res.status(500).send(error);
@@ -53,7 +52,6 @@ router.post(
       .isLength({ min: 6 })
       .withMessage("Password must be at least 6 characters long"),
     body("gender").notEmpty().withMessage("Gender is required"),
-    body("hostel").notEmpty().withMessage("Hostel is required"),
     body("roomno").notEmpty().withMessage("Room number is required"),
     body("floorno").notEmpty().withMessage("Floor number is required"),
   ],
@@ -80,16 +78,12 @@ router.post(
 router.put(
   "/students",
   [
-    body("stdid").notEmpty().withMessage("Student ID is required"),
-    body("name").notEmpty().withMessage("Name is required"),
-    body("email").isEmail().withMessage("Invalid email format"),
+    body("fname").notEmpty().withMessage("Name is required"),
+    body("lname").notEmpty().withMessage("Name is required"),
     body("country").notEmpty().withMessage("Country is required"),
     body("state").notEmpty().withMessage("State is required"),
     body("city").notEmpty().withMessage("City is required"),
     body("phone").isNumeric().withMessage("Phone number must be numeric"),
-    body("password")
-      .isLength({ min: 6 })
-      .withMessage("Password must be at least 6 characters long"),
   ],
   async function (req, res) {
     const errors = validationResult(req);
@@ -111,7 +105,6 @@ router.put(
         student.state = req.body.state;
         student.city = req.body.city;
         student.phone = req.body.phone;
-        student.password = req.body.password;
         const updatedStudent = await student.save();
         res.status(200).json({
           message: "Student updated successfully",
@@ -125,6 +118,52 @@ router.put(
     }
   }
 );
+router.put("/students/reset", async function (req, res) {
+  try {
+    let studentemail = req.body.email;
+    let student = await StudentModel.findOne({ email: studentemail });
+    if (!student) {
+      return res
+        .status(404)
+        .send("The student you are trying to update does not exist.");
+    } else {
+      student.password = req.body.password;
+      const updatedStudent = await student.save();
+      res.status(200).json({
+        message: "Student updated successfully",
+        data: updatedStudent,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
+router.put("/students/request/:id", async function (req, res) {
+  try {
+    let id = req.params.id;
+    console.log(id);
+    let student = await StudentModel.findOne({ stdid: id });
+    console.log(student);
+    if (!student) {
+      return res
+        .status(404)
+        .send("The student you are trying to update does not exist.");
+    } else {
+      student.reqid.push(req.body.reqid);
+      const updatedStudent = await student.save();
+      res.status(200).json({
+        message: "Student updated successfully",
+        data: updatedStudent,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
 
 router.delete("/students/remove/:id", async function (req, res) {
   try {

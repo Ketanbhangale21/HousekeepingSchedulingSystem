@@ -21,6 +21,10 @@
   table-layout: fixed;
 }
 
+.inner-container1 thead {
+  color: #f5f5f5;
+}
+
 .inner-container1 td {
   padding: 12px 16px;
   border: 1px solid #ddd;

@@ -3,21 +3,15 @@ import "./studentreq.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
 
 const StudentRequest = () => {
   const [errors, setErrors] = useState("");
   const [stdid, setStdid] = useState("");
   const [studentEmail, setstudentEmail] = useState("");
-  const currentDate = new Date();
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  const formattedDate = currentDate.toLocaleDateString("en-US", options);
+
   const [requestDetails, setRequestDetails] = useState({
-    date: formattedDate,
+    date: new Date(), // Initial date value
     selectedTime: "",
     requestTypes: [],
   });
@@ -32,7 +26,7 @@ const StudentRequest = () => {
         if (userData.length > 0) {
           // Get all request IDs associated with the user
           setStdid(userData[0].stdid);
-          console.log(stdid);
+          // console.log(stdid);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -65,7 +59,15 @@ const StudentRequest = () => {
     }
   };
   const handleDateChange = (date) => {
-    setRequestDetails({ ...requestDetails, date });
+    const options = {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    setRequestDetails({ ...requestDetails, date: formattedDate });
+    console.log(formattedDate);
   };
 
   const handleTimeClick = (selectedTime) => {
@@ -103,6 +105,9 @@ const StudentRequest = () => {
   };
   const handleFeedback = async (e) => {
     e.preventDefault();
+    console.log(requestDetails.date);
+    console.log(requestDetails.time);
+    console.log(requestDetails.requestTypes);
     if (
       !requestDetails.date ||
       !requestDetails.time ||
@@ -120,12 +125,13 @@ const StudentRequest = () => {
       dataObj.reqs = requestDetails.requestTypes;
       dataObj.status = "Created";
       dataObj.stdid = stdid;
+      console.log(dataObj);
       await axios.post("http://localhost:3005/api/requests", dataObj);
       await axios.put(
         `http://localhost:3005/api/students/request/${stdid}`,
         dataObj
       );
-      console.log(requestDetails);
+      // console.log(requestDetails.date);
       alert("Request created Successfully");
       // alert("Request created Successfully");
       //   dataObj.reqid = newID;
@@ -149,7 +155,7 @@ const StudentRequest = () => {
 
             <Calendar
               onChange={(e) => {
-                handleDateChange();
+                handleDateChange(e);
                 setErrors("");
               }}
               value={requestDetails.date}

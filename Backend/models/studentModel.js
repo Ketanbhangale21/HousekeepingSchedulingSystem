@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var studentSchema = new Schema(
   {
-    stdid: Number,
+    stdid: String,
     fname: String,
     lname: String,
     email: String,
@@ -19,9 +19,9 @@ var studentSchema = new Schema(
     secquestion: String,
     secanswer: String,
     hostel: String,
-    roomno: String,
+    roomno: Number,
     floorno: Number,
-    reqid: String,
+    reqid: Array,
   },
   { versionKey: false }
 );

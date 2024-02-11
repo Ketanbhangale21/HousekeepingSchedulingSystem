@@ -10,9 +10,9 @@ var reqSchema = new Schema(
     date: String,
     timings: String,
     reqs: Array,
-    hid: Number,
+    hid: String,
     status: String,
-    stdid: Number,
+    stdid: String,
   },
   { versionKey: false }
 );

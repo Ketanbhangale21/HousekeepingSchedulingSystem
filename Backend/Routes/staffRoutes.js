@@ -9,7 +9,7 @@ router.get("/staff", async function (req, res) {
   try {
     let result = await StaffModel.find({}, { _id: 0 }).sort({ hid: 1 }).lean();
     res.send(result);
-    console.table(result);
+    // console.table(result);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -81,9 +81,9 @@ router.put(
     }
     try {
       let staffid = req.body.hid;
-      console.log(staffid);
+      // console.log(staffid);
       let staff = await StaffModel.findOne({ hid: staffid });
-      console.log(staff);
+      // console.log(staff);
       if (!staff) {
         return res
           .status(404)
@@ -110,6 +110,55 @@ router.put(
     }
   }
 );
+router.put("/staff/allocate/:id", async function (req, res) {
+  try {
+    let id = req.params.id;
+
+    let staff = await StaffModel.findOne({ hid: id });
+    if (!staff) {
+      return res
+        .status(404)
+        .send("The staff you are trying to update does not exist.");
+    } else {
+      staff.status = req.body.status;
+      staff.reqid.push(req.body.reqid);
+      console.log(req.body.reqid);
+      const updatedStaff = await staff.save();
+      res.status(200).json({
+        message: "Staff updated successfully",
+        data: updatedStaff,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
+router.put("/staff/complete/:id", async function (req, res) {
+  try {
+    let id = req.params.id;
+
+    let staff = await StaffModel.findOne({ hid: id });
+    if (!staff) {
+      return res
+        .status(404)
+        .send("The staff you are trying to update does not exist.");
+    } else {
+      staff.status = req.body.status;
+      // console.log(req.body.reqid);
+      const updatedStaff = await staff.save();
+      res.status(200).json({
+        message: "Staff updated successfully",
+        data: updatedStaff,
+      });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
 
 router.delete("/staff/remove/:id", async function (req, res) {
   try {

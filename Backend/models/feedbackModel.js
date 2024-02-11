@@ -23,6 +23,10 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  stdid: {
+    type: String,
+    required: true,
+  },
 });
 
 const FeedbackModel = mongoose.model("Feedbacks", feedbackSchema, "Feedbacks");

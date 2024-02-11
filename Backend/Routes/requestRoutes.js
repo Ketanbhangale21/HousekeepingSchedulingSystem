@@ -10,14 +10,38 @@ router.get("/requests", async function (req, res) {
   try {
     let result = await ReqModel.find({}, { _id: 0 }).sort({ reqid: 1 }).lean();
     res.send(result);
-    console.table(result);
+    // console.table(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+router.get("/requests/:id", async function (req, res) {
+  var id = req.params.id;
+  try {
+    let result = await ReqModel.findOne({ stdid: id }, { _id: 0 })
+      .sort({ reqid: 1 })
+      .lean();
+    res.send(result);
+    // console.table(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+router.get("/requests/admin/:id", async function (req, res) {
+  var id = req.params.id;
+  try {
+    let result = await ReqModel.findOne({ reqid: id }, { _id: 0 })
+      .sort({ reqid: 1 })
+      .lean();
+    res.send(result);
+    // console.table(result);
   } catch (error) {
     res.status(500).send(error);
   }
 });
 
 router.post(
-  "/request",
+  "/requests",
   [
     // Validation for input fields using express-validator
     body("date").notEmpty().withMessage("Date is required"),
@@ -33,12 +57,14 @@ router.post(
     try {
       // Create a new request object
       const newReq = new ReqModel({
+        reqid: req.body.reqid,
         date: req.body.date,
         timings: req.body.timings,
         reqs: req.body.reqs,
         status: req.body.status,
+        stdid: req.body.stdid,
       });
-
+      console.log(newReq);
       // Save the new request to the database
       await newReq.save();
 
@@ -91,5 +117,26 @@ router.put(
     }
   }
 );
+router.put("/requests/admin/:id", async (req, res) => {
+  try {
+    let id = req.params.id;
+    console.log(id);
+    let request = await ReqModel.findOne({ reqid: id });
+    if (!request) {
+      return res.status(404).send("The request does not exist");
+    } else {
+      request.status = req.body.status;
+      request.hid = req.body.hid;
+      const UpdatedRequest = await request.save();
+      res
+        .status(200)
+        .json({ message: "Request Updated", data: UpdatedRequest });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", message: error.message });
+  }
+});
 
 module.exports = router;

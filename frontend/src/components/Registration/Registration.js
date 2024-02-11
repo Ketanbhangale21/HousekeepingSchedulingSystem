@@ -194,7 +194,7 @@ const AddStudent = () => {
         <div className="form-container1">
           <form className="form">
             <div className="input-name">
-              <FaUser className="icon1" />
+              <FaUser className="icon1 mt-4" />
               <input
                 type="text"
                 value={firstName}
@@ -208,7 +208,7 @@ const AddStudent = () => {
 
               <span>&nbsp;&nbsp;</span>
 
-              <FaUser className="icon1" />
+              <FaUser className="icon1 mt-4" />
               <input
                 type="text"
                 value={lastName}
