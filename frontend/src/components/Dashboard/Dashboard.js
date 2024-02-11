@@ -8,10 +8,14 @@ import Students from "../AdminDashboard/Students/Students";
 import FeedbackForm from "../StudentDashboard/Feedback/feedback";
 import AdminFeedbackComponent from "../AdminDashboard/Feedback/Feedback";
 import StudentRequest from "../StudentDashboard/MyRequests/StudentRequests";
+import RequestStatus from "../StudentDashboard/Status/StudentRstatus";
+import Profile from "../StudentDashboard/Profile/Profile";
+import AdminRequest from "../AdminDashboard/Requests/AdminRequest";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [prop1, setProp1] = useState("");
+  const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
 
   const handleRoutes = (e) => {
@@ -21,7 +25,7 @@ const Dashboard = () => {
   useEffect(() => {
     try {
       setProp1(sessionStorage.getItem("UserType"));
-      console.log(sessionStorage.getItem("UserEmail"));
+      setUseremail(sessionStorage.getItem("UserEmail"));
     } catch (error) {
       console.log("Error:", error);
     }
@@ -56,10 +60,16 @@ const Dashboard = () => {
               >
                 <i className="bi bi-telegram"></i>My Requests
               </div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("studentstatus")}
+              >
                 <i className="bi bi-joystick"></i>Status
               </div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item "
+                onClick={() => handleRoutes("profile")}
+              >
                 <i className="bi bi-person-circle"></i>Profile
               </div>
               <div
@@ -72,7 +82,10 @@ const Dashboard = () => {
           )}
           {prop1 === "Admin" && (
             <div>
-              <div className="sidebar-item ">
+              <div
+                className="sidebar-item"
+                onClick={() => handleRoutes("adminrequest")}
+              >
                 <i className="bi bi-telegram"></i>Requests
               </div>
               <div
@@ -211,6 +224,9 @@ const Dashboard = () => {
           {route === "studentfeedback" && <FeedbackForm />}
           {route === "adminfeedback" && <AdminFeedbackComponent />}
           {route === "studentrequest" && <StudentRequest />}
+          {route === "profile" && <Profile />}
+          {route === "adminrequest" && <AdminRequest />}
+          {route === "studentstatus" && <RequestStatus userEmail={userEmail} />}
         </div>
       </div>
     </div>

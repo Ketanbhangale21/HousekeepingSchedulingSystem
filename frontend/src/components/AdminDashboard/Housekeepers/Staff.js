@@ -105,7 +105,7 @@ const Staff = () => {
                   </td>
 
                   <td>{housekeeper.email}</td>
-                  <td>Active</td>
+                  <td>{housekeeper.status}</td>
                   <td>
                     <i
                       class="bi bi-plus-square"
@@ -320,10 +320,10 @@ const Staff = () => {
               </div>
             )}
           </div>
-          <button onClick={handleBack} className="links">
+          <button onClick={handleBack} className="links-btn">
             Back
           </button>
-          <button onClick={handleUpdate} className="links">
+          <button onClick={handleUpdate} className="links-btn">
             Update
           </button>{" "}
         </div>

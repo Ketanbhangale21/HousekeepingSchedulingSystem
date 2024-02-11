@@ -70,6 +70,8 @@ const AddStaff = () => {
       dataObj.phone = phoneNumber;
       dataObj.city = city;
       dataObj.gender = gender;
+      dataObj.status = "inactive";
+      dataObj.reqid = [];
       await axios
         .post("http://localhost:3005/api/staff", dataObj)
         .then((resData) => {

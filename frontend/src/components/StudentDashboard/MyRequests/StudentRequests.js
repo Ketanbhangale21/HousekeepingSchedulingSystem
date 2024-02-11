@@ -31,9 +31,7 @@ const StudentRequest = () => {
         );
         if (userData.length > 0) {
           // Get all request IDs associated with the user
-          userData.forEach((dataItem) => {
-            setStdid(dataItem.stdid);
-          });
+          setStdid(userData[0].stdid);
           console.log(stdid);
         }
       } catch (error) {
@@ -42,9 +40,9 @@ const StudentRequest = () => {
     }
 
     fetchData();
-  }, []);
+  }, [stdid, studentEmail]);
   const generateUniqueID = async () => {
-    return "FB" + Math.floor(100000 + Math.random() * 900000);
+    return "RQ" + Math.floor(100000 + Math.random() * 900000);
   };
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -64,6 +62,7 @@ const StudentRequest = () => {
     } else {
       setRequestDetails({ ...requestDetails, [name]: value });
     }
+    console.log(requestDetails);
   };
   const handleDateChange = (date) => {
     setRequestDetails({ ...requestDetails, date });
@@ -122,7 +121,12 @@ const StudentRequest = () => {
       dataObj.status = "Created";
       dataObj.stdid = stdid;
       await axios.post("http://localhost:3005/api/requests", dataObj);
+      await axios.put(
+        `http://localhost:3005/api/students/request/${stdid}`,
+        dataObj
+      );
       alert("Request created Successfully");
+      // alert("Request created Successfully");
       //   dataObj.reqid = newID;
     } catch {}
   };

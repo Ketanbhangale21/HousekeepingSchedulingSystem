@@ -5,7 +5,7 @@ import "./feedback.css";
 const FeedbackForm = () => {
   const [requestIds, setRequestIds] = useState([]);
   const [selectedReqId, setSelectedReqId] = useState("");
-  const [housekeeperData, sethousekeeperData] = useState([]);
+  const [stdid, setStdid] = useState("");
   const [housekeeperName, sethousekeeperName] = useState("");
   const [housekeeperID, sethousekeeperID] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -25,7 +25,9 @@ const FeedbackForm = () => {
         const userData = response.data.filter(
           (user) => user.email === studentEmail
         );
-        // console.log(userData);
+        const newid = userData[0].stdid;
+        setStdid(newid);
+
         if (userData.length > 0) {
           // Get all request IDs associated with the user
           const userRequestIds = userData.map((user) => user.reqs).flat();
@@ -76,7 +78,9 @@ const FeedbackForm = () => {
       hid: housekeeperID,
       rating: rating,
       feedback: feedback,
+      stdid: stdid,
     };
+    console.log(feedbackData);
     axios
       .post("http://localhost:3005/api/feedbacks", feedbackData)
       .then((response) => {

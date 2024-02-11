@@ -96,7 +96,7 @@ const AddStudent = () => {
     return { valid: true };
   };
   function isValid() {
-    const user = userData.find((user) => user.emailid === email.toLowerCase());
+    const user = userData.find((user) => user.email === email.toLowerCase());
     const isValidPassword = isPasswordValid(password);
     if (!email || !password || !repassword) {
       setErrors("Email and Password are required.");
@@ -190,7 +190,7 @@ const AddStudent = () => {
         <div className="form-container1">
           <form className="form">
             <div className="input-name">
-              <FaUser className="icon" />
+              <FaUser className="icon1" />
               <input
                 type="text"
                 value={firstName}
@@ -204,7 +204,7 @@ const AddStudent = () => {
 
               <span>&nbsp;&nbsp;</span>
 
-              <FaUser className="icon" />
+              <FaUser className="icon1" />
               <input
                 type="text"
                 value={lastName}
@@ -218,7 +218,7 @@ const AddStudent = () => {
             </div>
 
             <div className="input-name">
-              <MdEmail className="icon" />
+              <MdEmail className="icon1" />
               <input
                 type="text"
                 value={email}
