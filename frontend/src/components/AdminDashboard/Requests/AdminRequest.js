@@ -11,7 +11,10 @@ const AdminRequest = () => {
     try {
       const response = await axios.get("http://localhost:3005/api/requests");
       const requestData = response.data;
-      const requestsArray = Object.values(requestData); // Get an array of arrays
+      const incompleteRequests = requestData.filter(
+        (request) => request.status !== "Completed"
+      );
+      const requestsArray = Object.values(incompleteRequests); // Get an array of arrays
       const flattenedRequests = requestsArray.flat();
       setRequests(flattenedRequests);
     } catch (error) {
@@ -27,13 +30,13 @@ const AdminRequest = () => {
 
       // Find an inactive housekeeper
       const inactiveHousekeeper = housekeepersData.find(
-        (housekeeper) => housekeeper.status === "inactive"
+        (housekeeper) => housekeeper.status === "Inactive"
       );
       console.log(inactiveHousekeeper);
 
       if (
-        inactiveHousekeeper !== "inactive" &&
-        inactiveHousekeeper !== "active"
+        inactiveHousekeeper !== "Inactive" &&
+        inactiveHousekeeper !== "Active"
       ) {
       }
       if (inactiveHousekeeper) {
@@ -63,18 +66,16 @@ const AdminRequest = () => {
 
   const completeRequest = async (reqid) => {
     try {
-      // await axios.put(`http://localhost:3005/api/requests/admin/${reqid}`, {
-      //   status: "Completed",
-      // });
       const response = await axios.get(
         `http://localhost:3005/api/requests/admin/${reqid}`
       );
       const { hid } = response.data;
-      // console.log(hid);
-
-      // Make a PUT request to update the housekeeper status to "Active"
+      // Make a PUT request to update the housekeeper status to "Inactive"
       await axios.put(`http://localhost:3005/api/staff/complete/${hid}`, {
-        status: "inactive",
+        status: "Inactive",
+      });
+      await axios.put(`http://localhost:3005/api/requests/admin/${reqid}`, {
+        status: "Completed",
       });
       alert("completed");
       fetchData(); // Refresh requests after update

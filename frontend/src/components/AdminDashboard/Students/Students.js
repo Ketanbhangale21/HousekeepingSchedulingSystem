@@ -53,7 +53,12 @@ const Students = () => {
                 <td>{student.email}</td>
                 <td>{student.floorno}</td>
                 <td>{student.roomno}</td>
-                <td>{student.reqid}</td>
+                <td>
+                  {" "}
+                  {student.reqid && student.reqid.length > 0
+                    ? student.reqid[student.reqid.length - 1]
+                    : ""}
+                </td>
               </tr>
             ))}
           </tbody>

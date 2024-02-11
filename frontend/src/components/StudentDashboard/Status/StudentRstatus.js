@@ -9,14 +9,13 @@ const RequestStatus = ({ userEmail }) => {
       try {
         const userData = await axios.get(`http://localhost:3005/api/students`);
         const user = userData.data.filter((user) => user.email === userEmail);
-        const id = parseInt(user[0].stdid);
+        const id = user[0].stdid;
         const response = await axios.get(`http://localhost:3005/api/requests`);
-        var filteredRequests = [];
-        Object.values(response.data).forEach(() => {
-          filteredRequests = response.data.filter((item) => item.stdid === id);
-        });
+        const filteredRequests = response.data.filter(
+          (item) => item.stdid === id
+        );
+        // Ensure that setRequests is called after filteredRequests is populated
         setRequests(filteredRequests);
-        console.log(filteredRequests);
       } catch (error) {
         console.error("Error fetching requests:", error);
       }

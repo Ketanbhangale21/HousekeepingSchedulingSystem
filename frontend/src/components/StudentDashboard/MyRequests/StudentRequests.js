@@ -38,22 +38,23 @@ const StudentRequest = () => {
         console.error("Error fetching data:", error);
       }
     }
-
     fetchData();
   }, [stdid, studentEmail]);
   const generateUniqueID = async () => {
     return "RQ" + Math.floor(100000 + Math.random() * 900000);
   };
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value, checked } = e.target;
     if (name === "requestType") {
       const updatedRequestTypes = checked
         ? [...requestDetails.requestTypes, value]
         : requestDetails.requestTypes.filter((type) => type !== value);
-      setRequestDetails({
-        ...requestDetails,
-        requestTypes: updatedRequestTypes,
-      });
+      setTimeout(() => {
+        setRequestDetails({
+          ...requestDetails,
+          requestTypes: updatedRequestTypes,
+        });
+      }, 0);
     } else if (name === "selectAll") {
       const allOptions = checked ? requestOptions : [];
       setTimeout(() => {
@@ -62,7 +63,6 @@ const StudentRequest = () => {
     } else {
       setRequestDetails({ ...requestDetails, [name]: value });
     }
-    console.log(requestDetails);
   };
   const handleDateChange = (date) => {
     setRequestDetails({ ...requestDetails, date });
@@ -125,6 +125,7 @@ const StudentRequest = () => {
         `http://localhost:3005/api/students/request/${stdid}`,
         dataObj
       );
+      console.log(requestDetails);
       alert("Request created Successfully");
       // alert("Request created Successfully");
       //   dataObj.reqid = newID;

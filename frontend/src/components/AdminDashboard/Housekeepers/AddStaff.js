@@ -29,7 +29,7 @@ const AddStaff = () => {
   const [errors, setErrors] = useState("");
 
   const generateUniqueID = async () => {
-    return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit random number
+    return "HK" + Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit random number
   };
 
   const handleRegistraion = async () => {

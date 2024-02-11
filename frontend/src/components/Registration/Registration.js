@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import "./registration.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddStudent = () => {
   const [userData, setUserData] = useState([]);
@@ -22,9 +22,7 @@ const AddStudent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setReShowPassword] = useState(false);
   const [errors, setErrors] = useState("");
-  const [newID, setNewid] = useState();
-  const [floorno, setNewfloor] = useState();
-  const [roomno, setNewroom] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -38,11 +36,14 @@ const AddStudent = () => {
 
     fetchData();
   }, []);
-
-  const generateUniqueID = async () => {
-    setNewid(Math.floor(100000 + Math.random() * 900000));
-    setNewfloor(Math.floor(Math.random() * 5) + 1);
-    setNewroom(Math.floor(Math.random() * 10) + 1);
+  const stdidGenerate = async () => {
+    return "ST" + Math.floor(100000 + Math.random() * 900000);
+  };
+  const generatefloorNo = async () => {
+    return Math.floor(Math.random() * 5) + 1;
+  };
+  const generatetroomNo = async () => {
+    return Math.floor(Math.random() * 10) + 1;
   };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -143,7 +144,9 @@ const AddStudent = () => {
       return;
     }
     try {
-      await generateUniqueID();
+      const newID = await stdidGenerate();
+      const floorno = await generatefloorNo();
+      const roomno = await generatetroomNo();
       let dataObj = {};
       dataObj.stdid = newID;
       dataObj.fname = firstName;
@@ -174,6 +177,7 @@ const AddStudent = () => {
       setRepassword("");
       setAnswer("");
       setSecQuestion("");
+      navigate("/");
     } catch (error) {
       console.error("Error registering student:", error);
       alert("Error registering student. Please try again later.");

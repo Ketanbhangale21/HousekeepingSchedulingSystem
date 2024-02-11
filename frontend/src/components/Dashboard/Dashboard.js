@@ -15,6 +15,7 @@ import AdminRequest from "../AdminDashboard/Requests/AdminRequest";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [prop1, setProp1] = useState("");
+  const [name, setName] = useState("");
   const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
 
@@ -26,6 +27,8 @@ const Dashboard = () => {
     try {
       setProp1(sessionStorage.getItem("UserType"));
       setUseremail(sessionStorage.getItem("UserEmail"));
+      setName(sessionStorage.getItem("UserName"));
+      console.log("UserName");
     } catch (error) {
       console.log("Error:", error);
     }
@@ -33,6 +36,7 @@ const Dashboard = () => {
   function login() {
     sessionStorage.removeItem("user-token");
     sessionStorage.removeItem("UserType");
+    sessionStorage.removeItem("UserName");
     sessionStorage.removeItem("UserEmail");
     navigate("/");
   }
@@ -41,7 +45,9 @@ const Dashboard = () => {
     <div>
       <div className="header">
         <h6 className="logo">HomeCare Pro</h6>
-        <h1 className="textheader">Welcome Admin</h1>
+
+        {prop1 === "Student" && <h1 className="textheader">Welcome {name}</h1>}
+        {prop1 === "Admin" && <h1 className="textheader">Welcome Admin</h1>}
       </div>
       <div className="mainContainer">
         <div className="sidebar ">

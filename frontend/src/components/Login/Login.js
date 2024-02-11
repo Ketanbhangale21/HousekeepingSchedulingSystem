@@ -69,8 +69,10 @@ const LoginComponent = () => {
           sessionStorage.setItem("UserType", "Admin");
         } else {
           sessionStorage.setItem("UserEmail", email);
+          sessionStorage.setItem("UserName", user.fname);
           console.log(sessionStorage.getItem("UserEmail"));
           sessionStorage.setItem("UserType", "Student");
+          console.log(user.fname);
         }
         const queryString = location.search; // returns the query string from the current url
         let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
