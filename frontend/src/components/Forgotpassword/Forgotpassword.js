@@ -119,9 +119,10 @@ function ForgotPasswordComponent() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container background">
       <div
         className={`inner-container ${fieldsEmpty !== "" ? "error-class" : ""}`}
+        style={{ width: "350px" }}
       >
         <h2>Forgot Password</h2>
         <form onSubmit={onSubmit}>
@@ -177,6 +178,7 @@ function ForgotPasswordComponent() {
                   setAnswer(e.target.value);
                   setFieldsEmpty("");
                 }}
+                placeholder="Answer"
                 autoComplete="off"
               />
             </div>
@@ -193,6 +195,7 @@ function ForgotPasswordComponent() {
                   setPassword(e.target.value);
                   setFieldsEmpty("");
                 }}
+                placeholder="New Password"
                 autoComplete="off"
               />
 

@@ -91,7 +91,7 @@ const LoginComponent = () => {
   };
 
   return (
-    <div className="outer-container">
+    <div className="outer-container background">
       <div className="container">
         <div className="form-container log-in-container">
           <form className="input-form">

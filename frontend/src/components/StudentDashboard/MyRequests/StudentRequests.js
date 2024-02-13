@@ -139,12 +139,14 @@ const StudentRequest = () => {
     } catch {}
   };
   const clear = () => {
-    setRequestDetails({
-      ...requestDetails,
-      date: "",
-      selectedTime: "",
-      requestTypes: [],
-    });
+    setTimeout(() => {
+      setRequestDetails({
+        ...requestDetails,
+        date: "",
+        selectedTime: "",
+        requestTypes: [],
+      });
+    }, 0);
   };
   const requestOptions = [
     "Mopping",
@@ -186,7 +188,7 @@ const StudentRequest = () => {
               <h4 className="design">Request:</h4>
               <hr />
               <div className="request">
-                <label className="title">
+                <label className="title text-left">
                   <input
                     type="checkbox"
                     name="selectAll"
@@ -200,7 +202,7 @@ const StudentRequest = () => {
                   Select All
                 </label>
                 {requestOptions.map((option) => (
-                  <label key={option}>
+                  <label key={option} className="title text-left">
                     <input
                       type="checkbox"
                       name="requestType"

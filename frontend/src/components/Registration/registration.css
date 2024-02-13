@@ -90,7 +90,6 @@ h2 {
 }
 
 .button:enabled:hover {
-  color: #ffc107;
   transform: scale(1);
   background-color: #00897b;
   box-shadow: none;

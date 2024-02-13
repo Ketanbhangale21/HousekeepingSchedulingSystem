@@ -32,11 +32,9 @@ const AdminRequest = () => {
 
   const allocateHousekeeperToRequest = async (reqid) => {
     try {
-      // Fetch housekeepers' data from the API
       const response = await axios.get("http://localhost:3005/api/staff");
       const housekeepersData = response.data;
 
-      // Find an inactive housekeeper
       const inactiveHousekeeper = housekeepersData.find(
         (housekeeper) => housekeeper.status === "Inactive"
       );
@@ -48,7 +46,6 @@ const AdminRequest = () => {
       ) {
       }
       if (inactiveHousekeeper) {
-        // If an inactive housekeeper is found, allocate their HID to the request
         await axios.put(`http://localhost:3005/api/requests/admin/${reqid}`, {
           status: "Allocated",
           hid: inactiveHousekeeper.hid,
@@ -60,10 +57,8 @@ const AdminRequest = () => {
             status: "Active",
           }
         );
-        // Display a success message
         alert("Housekeeper allocated successfully");
       } else {
-        // If no inactive housekeeper is found, display a message
         alert("No inactive housekeeper available for allocation");
       }
     } catch (error) {
@@ -78,7 +73,6 @@ const AdminRequest = () => {
         `http://localhost:3005/api/requests/admin/${reqid}`
       );
       const { hid } = response.data;
-      // Make a PUT request to update the housekeeper status to "Inactive"
       await axios.put(`http://localhost:3005/api/staff/complete/${hid}`, {
         status: "Inactive",
       });
@@ -86,7 +80,7 @@ const AdminRequest = () => {
         status: "Completed",
       });
       alert("completed");
-      fetchData(); // Refresh requests after update
+      fetchData();
     } catch (error) {
       console.error("Error completing request:", error);
     }
@@ -166,7 +160,7 @@ const AdminRequest = () => {
                   &laquo; Prev
                 </li>
               )}
-              {/* Page Numbers */}
+
               {Array.from(
                 { length: Math.ceil(requests.length / recordsPerPage) },
                 (_, index) => (
@@ -179,7 +173,7 @@ const AdminRequest = () => {
                   </li>
                 )
               )}
-              {/* Next Button */}
+
               {currentPage !== totalPages && (
                 <li onClick={() => handlePageChange(currentPage + 1)}>
                   Next &raquo;

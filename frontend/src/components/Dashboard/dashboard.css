@@ -40,7 +40,7 @@
   margin: 10px 0;
   padding: 20px;
   height: calc(100vh - 160px);
-  border-right: 1px solid #e0e2e5;
+  border-right: 1px solid #19725d;
 }
 .bi {
   margin-right: 10px;
@@ -65,6 +65,8 @@
   background-color: #fef1c7;
 }
 .mainContainer {
+  background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
+  padding-top: 30px;
   display: flex;
 }
 .mainContent {

@@ -53,7 +53,7 @@ const RequestStatus = ({ userEmail }) => {
                 <td>{request.date}</td>
                 <td>{request.timings}</td>
                 <td>
-                  <ul className="p-0" style={{ "list-style-type": "none" }}>
+                  <ul className="p-0" style={{ listStyleType: "none" }}>
                     {request.reqs.map((req, index) => (
                       <li key={index} className="requests">
                         {req}

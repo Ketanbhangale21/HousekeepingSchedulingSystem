@@ -188,14 +188,18 @@ const AddStudent = () => {
     setSecQuestion("");
   }
   return (
-    <div className="">
-      <h2>Student Registration</h2>
-      <div className="container">
+    <div className="outer-container background">
+      <div className="container" style={{ minHeight: "550px" }}>
         <div className="img">
-          <img src="/user.png" alt="" style={{ width: "400px" }} />
+          <img
+            src="/user.png"
+            alt=""
+            style={{ width: "400px", borderRadius: "10px" }}
+          />
         </div>
         <div className="form-container1">
           <form className="form">
+            <h2 className="m-0 p-0">Student Registration</h2>
             <div className="input-name">
               <FaUser className="icon1 mt-4" />
               <input
@@ -352,7 +356,7 @@ const AddStudent = () => {
             {secquestion && (
               <div className="input-name">
                 <input
-                  className="t-name"
+                  className="text-name"
                   type="text"
                   id="Answer"
                   name="Answer"

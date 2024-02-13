@@ -182,12 +182,16 @@ const Staff = () => {
             </div>
             <div className="profile-details">
               <div className="detail">
+                <span className="label">HiD</span>
+                <span className="value">{selectedHousekeeper.hid}</span>
+              </div>
+              <div className="detail">
                 <span className="label">First Name:</span>
                 <span className="value">{selectedHousekeeper.fname}</span>
               </div>
               <div className="detail">
                 <span className="label">Last Name:</span>
-                <span className="value">{selectedHousekeeper.fname}</span>
+                <span className="value">{selectedHousekeeper.lname}</span>
               </div>
               <div className="detail">
                 <span className="label">Email:</span>
@@ -223,8 +227,21 @@ const Staff = () => {
             </div>
             {editable && (
               <div className="editHouskeeper">
-                <table>
+                <table className="">
                   <tbody>
+                    <tr>
+                      <td>
+                        <span className="label">HiD</span>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          id="hid"
+                          defaultValue={selectedHousekeeper.hid}
+                          disabled
+                        />
+                      </td>
+                    </tr>
                     <tr>
                       <td>
                         <span className="label">First Name:</span>

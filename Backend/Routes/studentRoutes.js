@@ -8,10 +8,22 @@ router.use(express.json());
 
 router.get("/students", async function (req, res) {
   try {
+    let result = await StudentModel.find({}, { _id: 0 })
+      .sort({ stdid: 1 })
+      .lean();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+router.get("/students/all", async function (req, res) {
+  try {
     let result = await StudentModel.find(
       { email: { $ne: "admin@example.com" } },
       { _id: 0 }
-    );
+    )
+      .sort({ stdid: 1 })
+      .lean();
     res.send(result);
   } catch (error) {
     res.status(500).send(error);
