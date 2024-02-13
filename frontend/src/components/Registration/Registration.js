@@ -397,7 +397,11 @@ const AddStudent = () => {
               </label>
             </div>
 
-            <button type="button" onClick={handleRegistraion} className="btn">
+            <button
+              type="button"
+              onClick={handleRegistraion}
+              className="button"
+            >
               Register
             </button>
             <p className="mt-2">

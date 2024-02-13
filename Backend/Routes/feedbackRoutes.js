@@ -13,7 +13,6 @@ router.post("/feedbacks", async (req, res) => {
     res.status(400).send(error);
   }
 });
-
 // Get all feedback
 router.get("/feedbacks", async (req, res) => {
   try {

@@ -5,7 +5,6 @@ import "./Profile.css";
 const Profile = () => {
   const [studentDetails, setStudentDetails] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
-  const [details, setDetails] = useState(false);
   const [editable, setEditable] = useState(false);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const Profile = () => {
       phone: document.getElementById("phone").value,
       gender: document.getElementById("gender").value,
     };
-
+    console.log(updatedStudent);
     try {
       await axios
         .put("http://localhost:3005/api/students", updatedStudent)
@@ -57,7 +56,7 @@ const Profile = () => {
   };
 
   const handleBack = () => {
-    setDetails(!details);
+    setEditable(false);
   };
 
   const editSelected = () => {
@@ -72,7 +71,7 @@ const Profile = () => {
           <div className="innercontainer">
             <div className="profile-card">
               <div className="profile-header">
-                {studentDetails.gender === "Female" ? (
+                {studentDetails.gender.toLowerCase() === "female" ? (
                   <img
                     src="profile1.png"
                     alt="Housekeeper Avatar"
@@ -92,16 +91,26 @@ const Profile = () => {
                     className="label"
                     style={{ textAlign: "start", paddingTop: "3px" }}
                   >
-                    First Name:
+                    SiD:
                   </span>
-                  <span className="value">{studentDetails.fname}</span>
+                  <span className="value">{studentDetails.stdid}</span>
                 </div>
                 <div className="detail">
                   <span
                     className="label"
                     style={{ textAlign: "start", paddingTop: "3px" }}
                   >
-                    Name:
+                    First Name:
+                  </span>
+                  <span className="value">{studentDetails.fname}</span>
+                </div>
+
+                <div className="detail">
+                  <span
+                    className="label"
+                    style={{ textAlign: "start", paddingTop: "3px" }}
+                  >
+                    Last Name:
                   </span>
                   <span className="value">{studentDetails.lname}</span>
                 </div>
@@ -171,6 +180,24 @@ const Profile = () => {
                 <div className="editHouskeeper">
                   <table>
                     <tbody>
+                      <tr>
+                        <td>
+                          <span
+                            className="label"
+                            style={{ textAlign: "start", paddingTop: "3px" }}
+                          >
+                            SiD:
+                          </span>
+                        </td>
+                        <td>
+                          <input
+                            type="text"
+                            id="stdid"
+                            disabled
+                            defaultValue={studentDetails.stdid}
+                          />
+                        </td>
+                      </tr>
                       <tr>
                         <td>
                           <span
@@ -313,12 +340,17 @@ const Profile = () => {
                 </div>
               )}
             </div>
-            <button onClick={handleUpdate} className="links-btn">
-              Update
-            </button>{" "}
-            <button onClick={handleBack} className="links-btn">
-              Back
-            </button>
+
+            {editable && (
+              <div className="d-flex justify-content-center">
+                <button onClick={handleBack} className="btn btn-primary me-3">
+                  Cancel
+                </button>
+                <button onClick={handleUpdate} className="btn btn-success me-3">
+                  Update
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -94,98 +94,100 @@ const AdminRequest = () => {
   };
 
   return (
-    <div>
-      {/* <h2>Requests</h2> */}
-      <table className="housekeepers-table">
-        <thead>
-          <tr>
-            <th>Request ID</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Requests</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRecords &&
-            currentRecords.map((request) => (
-              <tr key={request.reqid}>
-                <td>{request.reqid}</td>
-                <td>{request.date}</td>
-                <td>{request.timings}</td>
-                <td>
-                  <ul style={{ "list-style-type": "none" }}>
-                    {request.reqs.map((req, index) => (
-                      <li key={index}>{req}</li>
-                    ))}
-                  </ul>
-                </td>
-                <td
-                  className={
-                    request.status === "Allocated"
-                      ? "text-primary"
-                      : request.status === "Completed"
-                      ? "text-success"
-                      : "text-default"
-                  }
-                >
-                  {request.status}
-                </td>
+    <div className="maincontainer">
+      <div className="outercontainer">
+        {/* <h2>Requests</h2> */}
+        <table className="housekeepers-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Requests</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentRecords &&
+              currentRecords.map((request) => (
+                <tr key={request.reqid}>
+                  <td>{request.reqid}</td>
+                  <td>{request.date}</td>
+                  <td>{request.timings}</td>
+                  <td>
+                    <ul style={{ "list-style-type": "none" }}>
+                      {request.reqs.map((req, index) => (
+                        <li key={index}>{req}</li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td
+                    className={
+                      request.status === "Allocated"
+                        ? "text-primary"
+                        : request.status === "Completed"
+                        ? "text-success"
+                        : "text-default"
+                    }
+                  >
+                    {request.status}
+                  </td>
 
-                <td>
-                  {request.status === "Created" ? (
-                    <button
-                      className="status1"
-                      onClick={() =>
-                        allocateHousekeeperToRequest(request.reqid)
-                      }
-                    >
-                      Allocate
-                    </button>
-                  ) : request.status === "Allocated" ? (
-                    <button
-                      onClick={() => completeRequest(request.reqid)}
-                      className="status2"
-                    >
-                      Complete
-                    </button>
-                  ) : null}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        {requests.length > recordsPerPage && (
-          <ul>
-            {/* Previous Button */}
-            {currentPage > 1 && (
-              <li onClick={() => handlePageChange(currentPage - 1)}>
-                &laquo; Prev
-              </li>
-            )}
-            {/* Page Numbers */}
-            {Array.from(
-              { length: Math.ceil(requests.length / recordsPerPage) },
-              (_, index) => (
-                <li
-                  key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
-                >
-                  {index + 1}
+                  <td>
+                    {request.status === "Created" ? (
+                      <button
+                        className="btn btn-primary status1"
+                        onClick={() =>
+                          allocateHousekeeperToRequest(request.reqid)
+                        }
+                      >
+                        Allocate
+                      </button>
+                    ) : request.status === "Allocated" ? (
+                      <button
+                        onClick={() => completeRequest(request.reqid)}
+                        className="btn btn-success status2"
+                      >
+                        Complete
+                      </button>
+                    ) : null}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <div className="pagination">
+          {requests.length > recordsPerPage && (
+            <ul>
+              {/* Previous Button */}
+              {currentPage > 1 && (
+                <li onClick={() => handlePageChange(currentPage - 1)}>
+                  &laquo; Prev
                 </li>
-              )
-            )}
-            {/* Next Button */}
-            {currentPage !== totalPages && (
-              <li onClick={() => handlePageChange(currentPage + 1)}>
-                Next &raquo;
-              </li>
-            )}
-          </ul>
-        )}
+              )}
+              {/* Page Numbers */}
+              {Array.from(
+                { length: Math.ceil(requests.length / recordsPerPage) },
+                (_, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? "active" : ""}
+                  >
+                    {index + 1}
+                  </li>
+                )
+              )}
+              {/* Next Button */}
+              {currentPage !== totalPages && (
+                <li onClick={() => handlePageChange(currentPage + 1)}>
+                  Next &raquo;
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

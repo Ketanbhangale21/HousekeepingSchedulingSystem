@@ -57,7 +57,7 @@ hr {
   background-color: rgb(249, 244, 238);
 }
 
-.btn {
+.btn1 {
   border-radius: 20px;
   color: #ffc107;
   font-size: 15px;
@@ -78,7 +78,7 @@ hr {
 .create {
   margin-top: 10px !important;
 }
-.btn:hover {
+.btn1:hover {
   transform: scale(1);
   background-color: #00897b;
   box-shadow: none;

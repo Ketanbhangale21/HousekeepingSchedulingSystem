@@ -26,12 +26,13 @@ const FeedbackForm = () => {
           (user) => user.email === studentEmail
         );
         const newid = userData[0].stdid;
+        // console.log(newid);
         setStdid(newid);
         if (userData.length > 0) {
           // Get all request IDs associated with the user
           const userRequestIds = userData.map((user) => user.reqid).flat();
           setRequestIds(userRequestIds);
-          // console.log(userRequestIds);
+          console.log(userRequestIds);
         }
       } catch (error) {
         console.error("Error fetching request IDs:", error);
@@ -165,7 +166,7 @@ const FeedbackForm = () => {
             className="form-control"
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn1 btn-primary">
           Submit Feedback
         </button>
       </form>

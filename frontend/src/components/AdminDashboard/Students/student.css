@@ -24,6 +24,7 @@
 }
 
 .students-table th {
+  color: #f5f5f5;
   padding: 12px 16px;
   border: 1px solid #ddd;
   text-align: center;

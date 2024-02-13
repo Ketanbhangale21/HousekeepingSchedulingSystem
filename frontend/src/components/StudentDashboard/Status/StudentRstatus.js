@@ -33,78 +33,80 @@ const RequestStatus = ({ userEmail }) => {
   }, [userEmail]);
 
   return (
-    <div>
-      {/* <h6>Request Status</h6> */}
-      <table className="housekeepers-table">
-        <thead>
-          <tr>
-            <th>Request ID</th>
-            <th>Date</th>
-            <th>Timings</th>
-            <th>Requests</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRecords.map((request) => (
-            <tr key={request.reqid}>
-              <td>{request.reqid}</td>
-              <td>{request.date}</td>
-              <td>{request.timings}</td>
-              <td>
-                <ul className="p-0" style={{ "list-style-type": "none" }}>
-                  {request.reqs.map((req, index) => (
-                    <li key={index} className="requests">
-                      {req}
-                    </li>
-                  ))}
-                </ul>
-              </td>
-              <td
-                className={
-                  request.status === "Allocated"
-                    ? "text-primary"
-                    : request.status === "Completed"
-                    ? "text-success"
-                    : "text-default"
-                }
-              >
-                {request.status}
-              </td>
+    <div className="maincontainer">
+      <div className="outercontainer">
+        {/* <h6>Request Status</h6> */}
+        <table className="housekeepers-table">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Date</th>
+              <th>Timings</th>
+              <th>Requests</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        {requests.length > recordsPerPage && (
-          <ul>
-            {/* Previous Button */}
-            {currentPage > 1 && (
-              <li onClick={() => handlePageChange(currentPage - 1)}>
-                &laquo; Prev
-              </li>
-            )}
-            {/* Page Numbers */}
-            {Array.from(
-              { length: Math.ceil(requests.length / recordsPerPage) },
-              (_, index) => (
-                <li
-                  key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
+          </thead>
+          <tbody>
+            {currentRecords.map((request) => (
+              <tr key={request.reqid}>
+                <td>{request.reqid}</td>
+                <td>{request.date}</td>
+                <td>{request.timings}</td>
+                <td>
+                  <ul className="p-0" style={{ "list-style-type": "none" }}>
+                    {request.reqs.map((req, index) => (
+                      <li key={index} className="requests">
+                        {req}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+                <td
+                  className={
+                    request.status === "Allocated"
+                      ? "text-primary"
+                      : request.status === "Completed"
+                      ? "text-success"
+                      : "text-default"
+                  }
                 >
-                  {index + 1}
+                  {request.status}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="pagination">
+          {requests.length > recordsPerPage && (
+            <ul>
+              {/* Previous Button */}
+              {currentPage > 1 && (
+                <li onClick={() => handlePageChange(currentPage - 1)}>
+                  &laquo; Prev
                 </li>
-              )
-            )}
-            {/* Next Button */}
-            {currentPage !== totalPages && (
-              <li onClick={() => handlePageChange(currentPage + 1)}>
-                Next &raquo;
-              </li>
-            )}
-          </ul>
-        )}
+              )}
+              {/* Page Numbers */}
+              {Array.from(
+                { length: Math.ceil(requests.length / recordsPerPage) },
+                (_, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? "active" : ""}
+                  >
+                    {index + 1}
+                  </li>
+                )
+              )}
+              {/* Next Button */}
+              {currentPage !== totalPages && (
+                <li onClick={() => handlePageChange(currentPage + 1)}>
+                  Next &raquo;
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

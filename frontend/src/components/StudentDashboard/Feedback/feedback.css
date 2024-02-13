@@ -30,7 +30,7 @@ textarea.form-control {
   height: 100px;
 }
 
-.btn {
+.btn1 {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -39,7 +39,7 @@ textarea.form-control {
   cursor: pointer;
 }
 
-.btn:hover {
+.btn1:hover {
   background-color: #0056b3;
 }
 /* Existing styles */

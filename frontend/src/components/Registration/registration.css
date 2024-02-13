@@ -69,7 +69,7 @@ h2 {
 .radio-btn {
   margin-right: 4px;
 }
-.btn {
+.button {
   border-radius: 20px;
   color: #fef1c7;
   font-size: 15px;
@@ -89,7 +89,7 @@ h2 {
   background-color: #009688;
 }
 
-.btn:enabled:hover {
+.button:enabled:hover {
   color: #ffc107;
   transform: scale(1);
   background-color: #00897b;

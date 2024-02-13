@@ -77,6 +77,10 @@ const Staff = () => {
   };
   const handleBack = () => {
     setDetails(!details);
+    setEditable(false);
+  };
+  const handleCancel = () => {
+    setEditable(false);
   };
   const editSelected = () => {
     setEditable(true);
@@ -108,7 +112,7 @@ const Staff = () => {
                   <td>{housekeeper.status}</td>
                   <td>
                     <i
-                      class="bi bi-plus-square"
+                      class="bi bi-plus-square text-primary"
                       style={{
                         borderRight: "1px solid #333",
                         paddingRight: "15px",
@@ -117,7 +121,7 @@ const Staff = () => {
                     ></i>
                     <span> </span>
                     <i
-                      className="bi bi-trash3"
+                      className="bi bi-trash3 text-danger"
                       onClick={() => handleDelete(housekeeper.hid)}
                     ></i>
                   </td>
@@ -320,12 +324,19 @@ const Staff = () => {
               </div>
             )}
           </div>
-          <button onClick={handleBack} className="links-btn">
-            Back
-          </button>
-          <button onClick={handleUpdate} className="links-btn">
-            Update
-          </button>{" "}
+          {editable && (
+            <div className="d-flex justify-content-center m-5">
+              <button onClick={handleBack} className="btn btn-primary me-3">
+                Back
+              </button>
+              <button onClick={handleCancel} className="btn btn-danger me-3">
+                Cancel
+              </button>
+              <button onClick={handleUpdate} className="btn btn-success">
+                Update
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

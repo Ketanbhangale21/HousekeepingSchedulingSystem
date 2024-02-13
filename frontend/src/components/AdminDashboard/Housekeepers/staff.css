@@ -31,6 +31,7 @@
 }
 
 .housekeepers-table th {
+  color: #f5f5f5;
   padding: 12px 16px;
   border: 1px solid #ddd;
   text-align: center;
@@ -121,36 +122,6 @@
   align-items: center;
   margin-bottom: 20px;
 }
-
-.links {
-  border-radius: 20px;
-  color: #fef1c7;
-  font-size: 15px;
-  font-weight: bold;
-  margin: 5px !important;
-  margin-top: 15px;
-  padding: 8px 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
-  border: 1px solid #009688;
-  perspective: 1000px;
-  box-shadow: 1px 2px 0px 2px rgba(0, 0, 0, 0.5);
-  transform: scale(1.012);
-  transition: 0.21s;
-  margin-left: 150px;
-  background-color: #009688;
-}
-
-.links:enabled {
-  background-color: #009688;
-}
-.links:enabled:hover {
-  transform: scale(1);
-  background-color: #00897b;
-  box-shadow: none;
-}
-
 .avatar {
   width: 70px;
   height: 70px;

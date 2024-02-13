@@ -18,10 +18,13 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
+  const [routes, setroutes] = useState(false);
 
-  const handleRoutes = (e) => {
+  const handleRoutes = async (e) => {
     setRoute("");
+    setroutes(e);
     setTimeout(() => setRoute(e), 0);
+    // setTimeout(() => setroutes(e), 0);
   };
   useEffect(() => {
     try {
@@ -34,15 +37,18 @@ const Dashboard = () => {
     }
   }, []);
   function login() {
-    sessionStorage.removeItem("user-token");
-    sessionStorage.removeItem("UserType");
-    sessionStorage.removeItem("UserName");
-    sessionStorage.removeItem("UserEmail");
-    navigate("/");
+    const confirmed = window.confirm("Logout");
+    if (confirmed) {
+      sessionStorage.removeItem("user-token");
+      sessionStorage.removeItem("UserType");
+      sessionStorage.removeItem("UserName");
+      sessionStorage.removeItem("UserEmail");
+      navigate("/");
+    }
   }
 
   return (
-    <div>
+    <div className="mainDiv">
       <div className="header">
         <h6 className="logo">HomeCare Pro</h6>
 
@@ -52,8 +58,10 @@ const Dashboard = () => {
       <div className="mainContainer">
         <div className="sidebar ">
           <div
-            className="sidebar-item "
             onClick={() => handleRoutes("dashboard")}
+            className={`sidebar-item ${
+              routes === "dashboard" ? " active1" : ""
+            }`}
           >
             <i className="bi bi-tv"></i>
             Dashboard
@@ -61,25 +69,33 @@ const Dashboard = () => {
           {prop1 === "Student" && (
             <div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "studentrequest" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("studentrequest")}
               >
                 <i className="bi bi-telegram"></i>My Requests
               </div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "studentstatus" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("studentstatus")}
               >
                 <i className="bi bi-joystick"></i>Status
               </div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "profile" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("profile")}
               >
                 <i className="bi bi-person-circle"></i>Profile
               </div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "studentfeedback" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("studentfeedback")}
               >
                 <i className="bi bi-card-checklist"></i>Feedback
@@ -89,45 +105,51 @@ const Dashboard = () => {
           {prop1 === "Admin" && (
             <div>
               <div
-                className="sidebar-item"
+                className={`sidebar-item ${
+                  routes === "adminrequest" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("adminrequest")}
               >
                 <i className="bi bi-telegram"></i>Requests
               </div>
               <div
-                className="sidebar-item"
+                className={`sidebar-item ${
+                  routes === "housekeepers" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("housekeepers")}
               >
                 <i className="bi bi-person-circle"></i>Housekeepers
               </div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "students" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("students")}
               >
                 <i className="bi bi-person-bounding-box"></i>Students
               </div>
               <div
-                className="sidebar-item "
+                className={`sidebar-item ${
+                  routes === "adminfeedback" ? " active1" : ""
+                }`}
                 onClick={() => handleRoutes("adminfeedback")}
               >
                 <i className="bi bi-card-checklist"></i>Feedbacks
               </div>
             </div>
           )}
-          <div className="sidebar-item " onClick={login}>
+          <div className={`sidebar-item`} onClick={login}>
             <i className="bi bi-box-arrow-left"></i>Logout
           </div>
         </div>
-
         {/* MAIN CONTENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */}
-
         <div className="mainContent">
           {route === "dashboard" && (
             <div className="maindashboard">
-              <div>
+              <div className="d-flex justify-content-center">
                 {/* PLACE YOUR DASHBOARD CODE HERE  */}
                 <div className="container2">
-                  <h3 style={{ textAlign: "center" }}>DASHBOARD</h3>
+                  {/* <h3 style={{ textAlign: "center" }}>DASHBOARD</h3> */}
                   <div className="main__cards">
                     <div className="card c1">
                       <div className="card_inner">
@@ -135,21 +157,18 @@ const Dashboard = () => {
                         <span className="font-bold text-title">50+</span>
                       </div>
                     </div>
-
                     <div className="card c2">
                       <div className="card_inner">
                         <p className="text-primary-p">Suggestions</p>
                         <span className="font-bold text-title">50+</span>
                       </div>
                     </div>
-
                     <div className="card c3">
                       <div className="card_inner">
                         <p className="text-primary-p">Feedback</p>
                         <span className="font-bold text-title">100+</span>
                       </div>
                     </div>
-
                     <div className="card c4">
                       <div className="card_inner">
                         <p className="text-primary-p">Complaints</p>
@@ -157,10 +176,11 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
-                  <h3 style={{ textAlign: "center" }}>SERVICES</h3>
+                  {/* <h3 style={{ textAlign: "center" }}>SERVICES</h3> */}
                   <div
                     id="myCarousel"
                     class="carousel slide"
+                    style={{ border: "1px solid #19725d" }}
                     data-ride="carousel"
                   >
                     <ol class="carousel-indicators">
@@ -208,15 +228,13 @@ const Dashboard = () => {
               </div>
             </div>
           )}
-          {/*  Display the appropriate content based on which tab is selected. */}
-          {/* AdminTabs */}
           {route === "housekeepers" && (
             <div>
               <Staff />
               {
                 <div className="addStaff">
                   <button
-                    className="btn btn-success p-2 addStaffbutton"
+                    className="btn btn-success p-2"
                     onClick={() => handleRoutes("addstaff")}
                   >
                     Add Staff

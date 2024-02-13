@@ -8,9 +8,10 @@ router.use(express.json());
 
 router.get("/students", async function (req, res) {
   try {
-    let result = await StudentModel.find({}, { _id: 0 })
-      .sort({ stdid: 1 })
-      .lean();
+    let result = await StudentModel.find(
+      { email: { $ne: "admin@example.com" } },
+      { _id: 0 }
+    );
     res.send(result);
   } catch (error) {
     res.status(500).send(error);
@@ -98,8 +99,8 @@ router.put(
           .status(404)
           .send("The student you are trying to update does not exist.");
       } else {
-        student.fname = req.body.name;
-        student.lname = req.body.name;
+        student.fname = req.body.fname;
+        student.lname = req.body.lname;
         student.email = req.body.email;
         student.country = req.body.country;
         student.state = req.body.state;

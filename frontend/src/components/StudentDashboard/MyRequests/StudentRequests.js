@@ -67,7 +67,7 @@ const StudentRequest = () => {
     };
     const formattedDate = date.toLocaleDateString("en-US", options);
     setRequestDetails({ ...requestDetails, date: formattedDate });
-    console.log(formattedDate);
+    // console.log(formattedDate);
   };
 
   const handleTimeClick = (selectedTime) => {
@@ -125,92 +125,110 @@ const StudentRequest = () => {
       dataObj.reqs = requestDetails.requestTypes;
       dataObj.status = "Created";
       dataObj.stdid = stdid;
-      console.log(dataObj);
+      // console.log(dataObj);
       await axios.post("http://localhost:3005/api/requests", dataObj);
       await axios.put(
         `http://localhost:3005/api/students/request/${stdid}`,
         dataObj
       );
-      // console.log(requestDetails.date);
+      // console.log(dataObj);
       alert("Request created Successfully");
       // alert("Request created Successfully");
       //   dataObj.reqid = newID;
+      clear();
     } catch {}
+  };
+  const clear = () => {
+    setRequestDetails({
+      ...requestDetails,
+      date: "",
+      selectedTime: "",
+      requestTypes: [],
+    });
   };
   const requestOptions = [
     "Mopping",
     "Dusting",
     "Cleaning",
     "Sweeping",
-    "Washroom Cleaning",
     "Bed Cleaning",
+    "Washroom Cleaning",
   ];
 
   return (
-    <div className="card-container">
-      <form>
-        <div className="card1">
-          <label className="title">
-            <h4 className="design">Date:</h4>
+    <div className="maincontainer">
+      <div className="outercontainer">
+        <div className="card-container">
+          <form>
+            <div className="card1">
+              <label className="title">
+                <h4 className="design">Date:</h4>
 
-            <Calendar
-              onChange={(e) => {
-                handleDateChange(e);
-                setErrors("");
-              }}
-              value={requestDetails.date}
-              className="calendar"
-            />
-          </label>
-        </div>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <div className="card1">
-          <label className="title">
-            <h4 className="design">Time:</h4>
-            {generateTimeCells()}
-          </label>
-        </div>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <div className="card1">
-          <h4 className="design">Request:</h4>
-          <hr />
-          <div className="request">
-            <label className="title">
-              <input
-                type="checkbox"
-                name="selectAll"
-                checked={
-                  requestDetails.requestTypes.length === requestOptions.length
-                }
-                onChange={handleChange}
-              />
-              <span>&nbsp;&nbsp;</span>
-              Select All
-            </label>
-            {requestOptions.map((option) => (
-              <label key={option}>
-                <input
-                  type="checkbox"
-                  name="requestType"
-                  value={option}
-                  checked={requestDetails.requestTypes.includes(option)}
+                <Calendar
                   onChange={(e) => {
-                    handleChange(e);
+                    handleDateChange(e);
                     setErrors("");
                   }}
+                  value={requestDetails.date}
+                  className="calendar"
                 />
-                <span>&nbsp;&nbsp;</span>
-                {option}
               </label>
-            ))}
-          </div>
+            </div>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <div className="card1">
+              <label className="title">
+                <h4 className="design">Time:</h4>
+                {generateTimeCells()}
+              </label>
+            </div>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <div className="card1">
+              <h4 className="design">Request:</h4>
+              <hr />
+              <div className="request">
+                <label className="title">
+                  <input
+                    type="checkbox"
+                    name="selectAll"
+                    checked={
+                      requestDetails.requestTypes.length ===
+                      requestOptions.length
+                    }
+                    onChange={handleChange}
+                  />
+                  <span>&nbsp;&nbsp;</span>
+                  Select All
+                </label>
+                {requestOptions.map((option) => (
+                  <label key={option}>
+                    <input
+                      type="checkbox"
+                      name="requestType"
+                      value={option}
+                      checked={requestDetails.requestTypes.includes(option)}
+                      onChange={(e) => {
+                        handleChange(e);
+                        setErrors("");
+                      }}
+                    />
+                    <span>&nbsp;&nbsp;</span>
+                    {option}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <br />
+            <button
+              type="button"
+              className="btn btn-primary create"
+              onClick={handleFeedback}
+            >
+              Create
+            </button>
+            {errors && <div className="errorMessage">{errors}</div>}
+          </form>
         </div>
-        <br />
-        <button type="button" className="btn create" onClick={handleFeedback}>
-          Create
-        </button>
-        {errors && <div className="errorMessage">{errors}</div>}
-      </form>
+      </div>
     </div>
   );
 };

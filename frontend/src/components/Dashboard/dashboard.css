@@ -5,6 +5,10 @@
   position: relative;
   border-bottom: 1px solid #e0e2e5;
 }
+.active1 {
+  background-color: #fef1c7;
+}
+
 .logo {
   width: 120px;
   position: absolute;
@@ -33,7 +37,6 @@
   width: 230px;
   min-width: 230px;
   max-width: 230px;
-  /* background-color: #f2f2f2; */
   margin: 10px 0;
   padding: 20px;
   height: calc(100vh - 160px);
@@ -48,17 +51,18 @@
   margin-bottom: 20px;
   padding: 10px 20px;
   /* background-color: #fff; */
-  color: #333;
+  color: #19725d !important;
   border-radius: 5px;
   cursor: pointer;
   font-size: 15px;
+  font-weight: bold;
   text-align: start;
   flex-grow: 1;
   flex-basis: 25%;
 }
 
 .sidebar-item:hover {
-  background-color: #e6e6e6;
+  background-color: #fef1c7;
 }
 .mainContainer {
   display: flex;
