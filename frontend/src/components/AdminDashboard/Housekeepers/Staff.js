@@ -182,10 +182,12 @@ const Staff = () => {
             </div>
             <div className="profile-details">
               <div className="detail">
-                <span className="label">Name:</span>
-                <span className="value">
-                  {selectedHousekeeper.fname} {selectedHousekeeper.lname}
-                </span>
+                <span className="label">First Name:</span>
+                <span className="value">{selectedHousekeeper.fname}</span>
+              </div>
+              <div className="detail">
+                <span className="label">Last Name:</span>
+                <span className="value">{selectedHousekeeper.fname}</span>
               </div>
               <div className="detail">
                 <span className="label">Email:</span>

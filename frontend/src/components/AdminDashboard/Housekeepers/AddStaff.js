@@ -14,7 +14,6 @@ const AddStaff = () => {
         console.error("Error fetching data:", error);
       }
     }
-
     fetchData();
   }, []);
   const [firstName, setFirstName] = useState("");

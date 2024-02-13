@@ -19,7 +19,9 @@ const Students = () => {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:3005/api/students");
+      const response = await axios.get(
+        "http://localhost:3005/api/students/all"
+      );
       const sortedStudents = response.data.sort((a, b) => a.sid - b.sid);
       setStudents(sortedStudents);
     } catch (error) {

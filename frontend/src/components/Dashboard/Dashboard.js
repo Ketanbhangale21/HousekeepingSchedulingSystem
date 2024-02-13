@@ -18,7 +18,7 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
-  const [routes, setroutes] = useState(false);
+  const [routes, setroutes] = useState("dashboard");
 
   const handleRoutes = async (e) => {
     setRoute("");

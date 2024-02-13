@@ -21,6 +21,7 @@ const AddStudent = () => {
   const [answer, setAnswer] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setReShowPassword] = useState(false);
+
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
@@ -33,7 +34,6 @@ const AddStudent = () => {
         console.error("Error fetching data:", error);
       }
     }
-
     fetchData();
   }, []);
   const stdidGenerate = async () => {
@@ -162,28 +162,31 @@ const AddStudent = () => {
       dataObj.roomno = roomno;
       dataObj.floorno = floorno;
       dataObj.gender = gender;
-      console.log(dataObj);
+      // console.log(dataObj);
       await axios.post("http://localhost:3005/api/students", dataObj);
       alert("Student Registered Successfully");
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setCountry("");
-      setState("");
-      setCity("");
-      setPhoneNumber("");
-      setGender("");
-      setPassword("");
-      setRepassword("");
-      setAnswer("");
-      setSecQuestion("");
+      clearFields();
       navigate("/");
     } catch (error) {
       console.error("Error registering student:", error);
       alert("Error registering student. Please try again later.");
     }
   };
-
+  // const clearFields = () => {
+  function clearFields() {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setCountry("");
+    setState("");
+    setCity("");
+    setPhoneNumber("");
+    setGender("");
+    setPassword("");
+    setRepassword("");
+    setAnswer("");
+    setSecQuestion("");
+  }
   return (
     <div className="">
       <h2>Student Registration</h2>
@@ -205,9 +208,7 @@ const AddStudent = () => {
                 placeholder="First Name"
                 className="name"
               />
-
               <span>&nbsp;&nbsp;</span>
-
               <FaUser className="icon1 mt-4" />
               <input
                 type="text"

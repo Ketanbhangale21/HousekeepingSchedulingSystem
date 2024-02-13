@@ -13,14 +13,12 @@ const FeedbackForm = () => {
   const [rating, setRating] = useState(null);
 
   useEffect(() => {
-    // Fetch request IDs associated with the student's email
     try {
       setstudentEmail(sessionStorage.getItem("UserEmail"));
       // console.log(studentEmail);
     } catch {}
     const fetchRequestIds = async () => {
       try {
-        // Replace 'studentEmail' with the actual student's email address
         const response = await axios.get(`http://localhost:3005/api/students`);
         const userData = response.data.filter(
           (user) => user.email === studentEmail
@@ -29,7 +27,6 @@ const FeedbackForm = () => {
         // console.log(newid);
         setStdid(newid);
         if (userData.length > 0) {
-          // Get all request IDs associated with the user
           const userRequestIds = userData.map((user) => user.reqid).flat();
           setRequestIds(userRequestIds);
           console.log(userRequestIds);
@@ -38,18 +35,15 @@ const FeedbackForm = () => {
         console.error("Error fetching request IDs:", error);
       }
     };
-
     fetchRequestIds();
   }, [studentEmail]);
-
   useEffect(() => {
-    // Fetch housekeeper's name and ID based on selected request ID
     try {
       if (selectedReqId) {
         console.log(selectedReqId);
         const fetchRequestIds = async () => {
           const response = await axios.get(`http://localhost:3005/api/staff`);
-          // console.log(response.data); // Log the entire response data
+          // console.log(response.data);
           const fildata = response.data.filter(
             (user) =>
               user.reqid && user.reqid.some((id) => id === selectedReqId)
@@ -61,7 +55,6 @@ const FeedbackForm = () => {
             });
           }
         };
-
         fetchRequestIds();
       } else {
         sethousekeeperName("");
@@ -72,7 +65,6 @@ const FeedbackForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Send feedback data to backend API
     const feedbackData = {
       reqid: selectedReqId,
       hname: housekeeperName,
@@ -98,7 +90,6 @@ const FeedbackForm = () => {
   return (
     <div className="container3">
       <form onSubmit={handleSubmit} className="feedback-form">
-        {/* <h2 className="d-flex">Feedback Form</h2> */}
         <div className="form-group">
           <label htmlFor="requestId" className="form-label">
             Request ID:
