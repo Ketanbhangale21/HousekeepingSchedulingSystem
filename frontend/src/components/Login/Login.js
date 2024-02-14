@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
 
+// LoginComponent is a functional component that handles the login functionality
 const LoginComponent = () => {
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get("http://localhost:3005/api/students");
-        setUserData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    fetchData();
-  }, []);
+  // Initialize state variables for email, password, error message, and password visibility
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorField, setError] = useState("");
-  const [userData, setUserData] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+
+  // TogglePasswordVisibility toggles the password visibility between text and password types
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  // navigate and location are hooks from react-router-dom for navigation and location handling
   const navigate = useNavigate();
   const location = useLocation();
 
+  // validateEmail checks if the given email is valid or not
   const validateEmail = (email) => {
     const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     return emailPattern.test(email);
   };
 
+  // handleEmailChange and handlePasswordChange update the email and password state variables
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
@@ -43,6 +39,7 @@ const LoginComponent = () => {
     setError("");
   };
 
+  // handleLogin handles the form submission and validates the email and password
   const handleLogin = (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -56,40 +53,51 @@ const LoginComponent = () => {
       Login(email, password);
     }
   };
+
+  // Login is an async function that sends a POST request to the API for login
   const Login = (email, password) => {
     setError("");
-    const user = userData.find((user) => user.email === email.toLowerCase());
-
-    if (!user) {
-      setError("Unregistered Email Id");
-      return;
-    } else {
-      if (user.password === password) {
-        if (user.email === "admin@example.com") {
-          sessionStorage.setItem("UserType", "Admin");
+    const loginData = { email, password };
+    axios
+      .post("http://localhost:3005/api/login", loginData)
+      .then((response) => {
+        if (response && response.data.message === "Login successful") {
+          console.log("Login successful");
+          setError(response.data.message);
+          // Perform any necessary actions upon successful login
         } else {
-          sessionStorage.setItem("UserEmail", email);
-          sessionStorage.setItem("UserName", user.fname);
-          console.log(sessionStorage.getItem("UserEmail"));
-          sessionStorage.setItem("UserType", "Student");
-          console.log(user.fname);
+          setError(response.data.error);
+          console.error("Login failed:", response.data.error);
         }
-        const queryString = location.search; // returns the query string from the current url
-        let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
-        if (strReturnUrl === null) {
-          strReturnUrl = "/dashboard";
-        }
-        // In real-time apps, we will get the token from the server
-        // JWT token is the popular token generation library
-        let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
-        sessionStorage.setItem("user-token", token);
-        navigate(strReturnUrl);
-      } else {
-        setError("Incorrect Password");
-      }
+      })
+      .catch((error) => {
+        console.error("Error during login:", error);
+      });
+
+    // Set the user type and email in the session storage
+    if (email === "admin@example.com") {
+      sessionStorage.setItem("UserType", "Admin");
+    } else {
+      sessionStorage.setItem("UserEmail", email);
+      sessionStorage.setItem("UserType", "Student");
     }
+
+    // Get the return URL from the location query string
+    const queryString = location.search;
+    let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
+    if (strReturnUrl === null) {
+      strReturnUrl = "/dashboard";
+    }
+
+    // Set a dummy token in the session storage
+    let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
+    sessionStorage.setItem("user-token", token);
+
+    // Navigate to the return URL
+    navigate(strReturnUrl);
   };
 
+  // Return the JSX for the login form
   return (
     <div className="outer-container background">
       <div className="container">
@@ -160,4 +168,5 @@ const LoginComponent = () => {
   );
 };
 
+// Export the LoginComponent for use in other modules
 export default LoginComponent;

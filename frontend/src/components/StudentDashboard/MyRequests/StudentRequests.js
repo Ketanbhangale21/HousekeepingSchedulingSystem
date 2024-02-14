@@ -185,10 +185,12 @@ const StudentRequest = () => {
             </div>
             <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <div className="card1">
-              <h4 className="design">Request:</h4>
-              <hr />
               <div className="request">
-                <label className="title text-left">
+                <h4 className="design">Request:</h4>
+                <label
+                  className="title text-left mt-5 "
+                  style={{ marginLeft: "15px" }}
+                >
                   <input
                     type="checkbox"
                     name="selectAll"
@@ -202,7 +204,11 @@ const StudentRequest = () => {
                   Select All
                 </label>
                 {requestOptions.map((option) => (
-                  <label key={option} className="title text-left">
+                  <label
+                    key={option}
+                    className="title text-left"
+                    style={{ marginLeft: "15px" }}
+                  >
                     <input
                       type="checkbox"
                       name="requestType"

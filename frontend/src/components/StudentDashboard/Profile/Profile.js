@@ -85,97 +85,99 @@ const Profile = () => {
                   />
                 )}
               </div>
-              <div className="profile-details">
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    SiD:
-                  </span>
-                  <span className="value">{studentDetails.stdid}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    First Name:
-                  </span>
-                  <span className="value">{studentDetails.fname}</span>
-                </div>
+              {!editable && (
+                <div className="profile-details">
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      SiD:
+                    </span>
+                    <span className="value">{studentDetails.stdid}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      First Name:
+                    </span>
+                    <span className="value">{studentDetails.fname}</span>
+                  </div>
 
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      Last Name:
+                    </span>
+                    <span className="value">{studentDetails.lname}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      Email:
+                    </span>
+                    <span className="value">{studentDetails.email}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      Country:
+                    </span>
+                    <span className="value">{studentDetails.country}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      State:
+                    </span>
+                    <span className="value">{studentDetails.state}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      City:
+                    </span>
+                    <span className="value">{studentDetails.city}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      Phone:
+                    </span>
+                    <span className="value">{studentDetails.phone}</span>
+                  </div>
+                  <div className="detail">
+                    <span
+                      className="label"
+                      style={{ textAlign: "start", paddingTop: "3px" }}
+                    >
+                      Gender:
+                    </span>
+                    <span className="value">{studentDetails.gender}</span>
+                  </div>
+                  <i
+                    className="bi bi-pencil-square"
+                    style={{ cursor: "pointer" }}
+                    onClick={editSelected}
                   >
-                    Last Name:
-                  </span>
-                  <span className="value">{studentDetails.lname}</span>
+                    Edit
+                  </i>
                 </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    Email:
-                  </span>
-                  <span className="value">{studentDetails.email}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    Country:
-                  </span>
-                  <span className="value">{studentDetails.country}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    State:
-                  </span>
-                  <span className="value">{studentDetails.state}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    City:
-                  </span>
-                  <span className="value">{studentDetails.city}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    Phone:
-                  </span>
-                  <span className="value">{studentDetails.phone}</span>
-                </div>
-                <div className="detail">
-                  <span
-                    className="label"
-                    style={{ textAlign: "start", paddingTop: "3px" }}
-                  >
-                    Gender:
-                  </span>
-                  <span className="value">{studentDetails.gender}</span>
-                </div>
-                <i
-                  className="bi bi-pencil-square"
-                  style={{ cursor: "pointer" }}
-                  onClick={editSelected}
-                >
-                  Edit
-                </i>
-              </div>
+              )}
               {editable && (
                 <div className="editHouskeeper">
                   <table>

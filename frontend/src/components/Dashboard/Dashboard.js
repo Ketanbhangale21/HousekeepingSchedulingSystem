@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +10,7 @@ import StudentRequest from "../StudentDashboard/MyRequests/StudentRequests";
 import RequestStatus from "../StudentDashboard/Status/StudentRstatus";
 import Profile from "../StudentDashboard/Profile/Profile";
 import AdminRequest from "../AdminDashboard/Requests/AdminRequest";
+import axios from "axios";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,23 +19,36 @@ const Dashboard = () => {
   const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
   const [routes, setroutes] = useState("dashboard");
-
   const handleRoutes = async (e) => {
     setRoute("");
     setroutes(e);
     setTimeout(() => setRoute(e), 0);
-    // setTimeout(() => setroutes(e), 0);
   };
   useEffect(() => {
     try {
-      setProp1(sessionStorage.getItem("UserType"));
-      setUseremail(sessionStorage.getItem("UserEmail"));
-      setName(sessionStorage.getItem("UserName"));
-      console.log("UserName");
+      async function fetchData() {
+        setUseremail(sessionStorage.getItem("UserEmail"));
+        setProp1(sessionStorage.getItem("UserType"));
+        try {
+          const response = await axios.get(
+            "http://localhost:3005/api/students"
+          );
+          // setUserData(response.data);
+          setName(
+            response.data.find((user) => user.email === userEmail)?.fname ??
+              null
+          );
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      fetchData();
     } catch (error) {
       console.log("Error:", error);
     }
-  }, []);
+  }, [userEmail]);
+
+  // console.log(fname);
   function login() {
     const confirmed = window.confirm("Logout");
     if (confirmed) {

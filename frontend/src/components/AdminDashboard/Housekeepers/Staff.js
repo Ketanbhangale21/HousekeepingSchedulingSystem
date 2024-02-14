@@ -180,51 +180,53 @@ const Staff = () => {
                 />
               )}
             </div>
-            <div className="profile-details">
-              <div className="detail">
-                <span className="label">HiD</span>
-                <span className="value">{selectedHousekeeper.hid}</span>
+            {!editable && (
+              <div className="profile-details">
+                <div className="detail">
+                  <span className="label">HiD</span>
+                  <span className="value">{selectedHousekeeper.hid}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">First Name:</span>
+                  <span className="value">{selectedHousekeeper.fname}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">Last Name:</span>
+                  <span className="value">{selectedHousekeeper.lname}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">Email:</span>
+                  <span className="value">{selectedHousekeeper.email}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">Country:</span>
+                  <span className="value">{selectedHousekeeper.country}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">State:</span>
+                  <span className="value">{selectedHousekeeper.state}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">City:</span>
+                  <span className="value">{selectedHousekeeper.city}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">Phone:</span>
+                  <span className="value">{selectedHousekeeper.phone}</span>
+                </div>
+                <div className="detail">
+                  <span className="label">Gender:</span>
+                  <span className="value">{selectedHousekeeper.gender}</span>
+                </div>
+                <i
+                  className="bi bi-pencil-square"
+                  style={{ cursor: "pointer" }}
+                  onClick={editSelected}
+                >
+                  Edit
+                </i>
               </div>
-              <div className="detail">
-                <span className="label">First Name:</span>
-                <span className="value">{selectedHousekeeper.fname}</span>
-              </div>
-              <div className="detail">
-                <span className="label">Last Name:</span>
-                <span className="value">{selectedHousekeeper.lname}</span>
-              </div>
-              <div className="detail">
-                <span className="label">Email:</span>
-                <span className="value">{selectedHousekeeper.email}</span>
-              </div>
-              <div className="detail">
-                <span className="label">Country:</span>
-                <span className="value">{selectedHousekeeper.country}</span>
-              </div>
-              <div className="detail">
-                <span className="label">State:</span>
-                <span className="value">{selectedHousekeeper.state}</span>
-              </div>
-              <div className="detail">
-                <span className="label">City:</span>
-                <span className="value">{selectedHousekeeper.city}</span>
-              </div>
-              <div className="detail">
-                <span className="label">Phone:</span>
-                <span className="value">{selectedHousekeeper.phone}</span>
-              </div>
-              <div className="detail">
-                <span className="label">Gender:</span>
-                <span className="value">{selectedHousekeeper.gender}</span>
-              </div>
-              <i
-                className="bi bi-pencil-square"
-                style={{ cursor: "pointer" }}
-                onClick={editSelected}
-              >
-                Edit
-              </i>
-            </div>
+            )}
             {editable && (
               <div className="editHouskeeper">
                 <table className="">
@@ -274,6 +276,7 @@ const Staff = () => {
                         <input
                           type="text"
                           id="email"
+                          disabled
                           defaultValue={selectedHousekeeper.email}
                         />
                       </td>
@@ -343,6 +346,13 @@ const Staff = () => {
               </div>
             )}
           </div>
+          {!editable && (
+            <div className="d-flex justify-content-center">
+              <button onClick={handleBack} className="btn btn-primary me-3">
+                Back
+              </button>
+            </div>
+          )}
           {editable && (
             <div className="d-flex justify-content-center m-5">
               <button onClick={handleBack} className="btn btn-primary me-3">
