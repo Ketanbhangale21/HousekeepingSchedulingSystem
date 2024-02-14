@@ -4,7 +4,7 @@ import axios from "axios";
 const RequestStatus = ({ userEmail }) => {
   const [requests, setRequests] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 4;
+  const recordsPerPage = 5;
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = requests.slice(indexOfFirstRecord, indexOfLastRecord);

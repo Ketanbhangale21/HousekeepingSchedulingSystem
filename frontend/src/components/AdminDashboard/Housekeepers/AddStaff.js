@@ -69,7 +69,7 @@ const AddStaff = () => {
       dataObj.phone = phoneNumber;
       dataObj.city = city;
       dataObj.gender = gender;
-      dataObj.status = "inactive";
+      dataObj.status = "Inactive";
       dataObj.reqid = [];
       await axios
         .post("http://localhost:3005/api/staff", dataObj)
@@ -100,7 +100,7 @@ const AddStaff = () => {
         <form className="form">
           <h2>Housekeeper Registration</h2>
           <div className="input-name">
-            <FaUser className="icon" />
+            <FaUser className="icon mt-4" />
             <input
               type="text"
               value={firstName}
@@ -114,7 +114,7 @@ const AddStaff = () => {
 
             <span>&nbsp;&nbsp;</span>
 
-            <FaUser className="icon" />
+            <FaUser className="icon mt-4" />
             <input
               type="text"
               value={lastName}
@@ -128,7 +128,7 @@ const AddStaff = () => {
           </div>
 
           <div className="input-name">
-            <MdEmail className="icon" />
+            <MdEmail className="icon mt-2" />
             <input
               type="text"
               value={email}
@@ -193,8 +193,7 @@ const AddStaff = () => {
           </div>
 
           <div className="input-name">
-            Gender :
-            <br />
+            {/* <br /> */}
             <label className="radio">
               <input
                 type="radio"
@@ -228,7 +227,7 @@ const AddStaff = () => {
           <button
             type="button"
             onClick={() => handleRegistraion()}
-            className="btn"
+            className="btn btn-success"
           >
             Register
           </button>

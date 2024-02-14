@@ -54,7 +54,6 @@ const Dashboard = () => {
     if (confirmed) {
       sessionStorage.removeItem("user-token");
       sessionStorage.removeItem("UserType");
-      sessionStorage.removeItem("UserName");
       sessionStorage.removeItem("UserEmail");
       navigate("/");
     }
@@ -160,9 +159,7 @@ const Dashboard = () => {
           {route === "dashboard" && (
             <div className="maindashboard">
               <div className="d-flex justify-content-center">
-                {/* PLACE YOUR DASHBOARD CODE HERE  */}
                 <div className="container2">
-                  {/* <h3 style={{ textAlign: "center" }}>DASHBOARD</h3> */}
                   <div className="main__cards">
                     <div className="card c1">
                       <div className="card_inner">
@@ -189,7 +186,6 @@ const Dashboard = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <h3 style={{ textAlign: "center" }}>SERVICES</h3> */}
                   <div
                     id="myCarousel"
                     class="carousel slide"
@@ -257,12 +253,13 @@ const Dashboard = () => {
             </div>
           )}
           {route === "addstaff" && <AddStaff />}
-          {route === "students" && <Students />}
-          {route === "studentfeedback" && <FeedbackForm />}
           {route === "adminfeedback" && <AdminFeedbackComponent />}
+          {route === "adminrequest" && <AdminRequest />}
+          {route === "students" && <Students />}
+
+          {route === "studentfeedback" && <FeedbackForm />}
           {route === "studentrequest" && <StudentRequest />}
           {route === "profile" && <Profile />}
-          {route === "adminrequest" && <AdminRequest />}
           {route === "studentstatus" && <RequestStatus userEmail={userEmail} />}
         </div>
       </div>

@@ -29,7 +29,7 @@ const FeedbackForm = () => {
         if (userData.length > 0) {
           const userRequestIds = userData.map((user) => user.reqid).flat();
           setRequestIds(userRequestIds);
-          console.log(userRequestIds);
+          // console.log(userRequestIds);
         }
       } catch (error) {
         console.error("Error fetching request IDs:", error);
@@ -40,7 +40,7 @@ const FeedbackForm = () => {
   useEffect(() => {
     try {
       if (selectedReqId) {
-        console.log(selectedReqId);
+        // console.log(selectedReqId);
         const fetchRequestIds = async () => {
           const response = await axios.get(`http://localhost:3005/api/staff`);
           // console.log(response.data);
@@ -57,8 +57,8 @@ const FeedbackForm = () => {
         };
         fetchRequestIds();
       } else {
-        sethousekeeperName("");
-        sethousekeeperID("");
+        sethousekeeperName("ReqNot Completed");
+        sethousekeeperID("ReqNot Completed");
       }
     } catch {}
   }, [selectedReqId]);
@@ -89,7 +89,11 @@ const FeedbackForm = () => {
 
   return (
     <div className="container3">
-      <form onSubmit={handleSubmit} className="feedback-form">
+      <form
+        onSubmit={handleSubmit}
+        className="feedback-form"
+        style={{ backgroundColor: "#f5f5f5", backdropFilter: "blur(10px)" }}
+      >
         <div className="form-group">
           <label htmlFor="requestId" className="form-label">
             Request ID:

@@ -82,7 +82,7 @@ function ForgotPasswordComponent() {
   const idCheck = (username) => {
     // setFieldsEmpty("");
     const user = userData.find((user) => user.email === username.toLowerCase());
-    console.log(user);
+    // console.log(user);
     if (!user) {
       setFieldsEmpty("Unregistered Email Id");
       return;
@@ -100,7 +100,7 @@ function ForgotPasswordComponent() {
               email: username,
               password: password,
             };
-            console.log(dataObj);
+            // console.log(dataObj);
             let url = "http://localhost:3005/api/students/reset";
             axios.put(url, dataObj).then((resData) => {
               alert("Password Updated successful");

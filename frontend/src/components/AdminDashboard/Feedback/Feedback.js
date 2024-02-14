@@ -5,11 +5,10 @@ import "./feedback.css";
 const AdminFeedbackComponent = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
+  const recordsPerPage = 7;
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = feedbacks.slice(indexOfFirstRecord, indexOfLastRecord);
-
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
   const totalPages = Math.ceil(feedbacks.length / recordsPerPage);
 
@@ -28,61 +27,65 @@ const AdminFeedbackComponent = () => {
   }, []);
 
   return (
-    <div className="outercontainer">
-      <h2>Feedbacks Received</h2>
-      <table className="inner-container1">
-        <thead>
-          <tr>
-            <th>Request ID</th>
-            <th>Housekeeper Id</th>
-            <th>Housekeeper Name</th>
-            <th>Rating</th>
-            <th>Feedback</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRecords.map((feedback) => (
-            <tr key={feedback.id}>
-              <td>{feedback.reqid}</td>
-              <td>{feedback.hid}</td>
-              <td>{feedback.hname}</td>
-              <td>{feedback.rating} Stars</td>
-              <td>{feedback.feedback}</td>
+    <div className="maincontainer">
+      <div className="outercontainer">
+        <h5 className="">Feedbacks Received</h5>
+        <table className="inner-container1">
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Housekeeper Id</th>
+              <th>Housekeeper Name</th>
+              <th>Rating</th>
+              <th>Feedback</th>
+              <th>SiD</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentRecords.map((feedback) => (
+              <tr key={feedback.id}>
+                <td>{feedback.reqid}</td>
+                <td>{feedback.hid}</td>
+                <td>{feedback.hname}</td>
+                <td>{feedback.rating} Stars</td>
+                <td>{feedback.feedback}</td>
+                <td>{feedback.stdid}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-      <div className="pagination">
-        {feedbacks.length > recordsPerPage && (
-          <ul>
-            {/* Previous Button */}
-            {currentPage > 1 && (
-              <li onClick={() => handlePageChange(currentPage - 1)}>
-                &laquo; Prev
-              </li>
-            )}
-            {/* Page Numbers */}
-            {Array.from(
-              { length: Math.ceil(feedbacks.length / recordsPerPage) },
-              (_, index) => (
-                <li
-                  key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
-                >
-                  {index + 1}
+        <div className="pagination">
+          {feedbacks.length > recordsPerPage && (
+            <ul>
+              {/* Previous Button */}
+              {currentPage > 1 && (
+                <li onClick={() => handlePageChange(currentPage - 1)}>
+                  &laquo; Prev
                 </li>
-              )
-            )}
-            {/* Next Button */}
-            {currentPage !== totalPages && (
-              <li onClick={() => handlePageChange(currentPage + 1)}>
-                Next &raquo;
-              </li>
-            )}
-          </ul>
-        )}
+              )}
+              {/* Page Numbers */}
+              {Array.from(
+                { length: Math.ceil(feedbacks.length / recordsPerPage) },
+                (_, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handlePageChange(index + 1)}
+                    className={currentPage === index + 1 ? "active" : ""}
+                  >
+                    {index + 1}
+                  </li>
+                )
+              )}
+              {/* Next Button */}
+              {currentPage !== totalPages && (
+                <li onClick={() => handlePageChange(currentPage + 1)}>
+                  Next &raquo;
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   );

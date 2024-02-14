@@ -22,7 +22,7 @@ const Students = () => {
       const response = await axios.get(
         "http://localhost:3005/api/students/all"
       );
-      const sortedStudents = response.data.sort((a, b) => a.sid - b.sid);
+      const sortedStudents = response.data.sort((a, b) => a.stdid - b.stdid);
       setStudents(sortedStudents);
     } catch (error) {
       console.error("Error fetching students:", error);

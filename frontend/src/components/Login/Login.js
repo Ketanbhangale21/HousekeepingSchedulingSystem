@@ -68,6 +68,7 @@ const LoginComponent = () => {
         } else {
           setError(response.data.error);
           console.error("Login failed:", response.data.error);
+          return;
         }
       })
       .catch((error) => {
@@ -88,11 +89,9 @@ const LoginComponent = () => {
     if (strReturnUrl === null) {
       strReturnUrl = "/dashboard";
     }
-
     // Set a dummy token in the session storage
     let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
     sessionStorage.setItem("user-token", token);
-
     // Navigate to the return URL
     navigate(strReturnUrl);
   };
@@ -148,7 +147,9 @@ const LoginComponent = () => {
               </Link>
             </p>
             {errorField && (
-              <div className="error-message text-danger">{errorField}</div>
+              <div className="error-message text-danger text-center">
+                {errorField}
+              </div>
             )}
           </form>
         </div>

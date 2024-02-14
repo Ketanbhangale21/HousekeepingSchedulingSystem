@@ -103,11 +103,11 @@ const StudentRequest = () => {
 
     return <div className="time-slots">{timeSlots}</div>;
   };
-  const handleFeedback = async (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
-    console.log(requestDetails.date);
-    console.log(requestDetails.time);
-    console.log(requestDetails.requestTypes);
+    // console.log(requestDetails.date);
+    // console.log(requestDetails.time);
+    // console.log(requestDetails.requestTypes);
     if (
       !requestDetails.date ||
       !requestDetails.time ||
@@ -133,8 +133,6 @@ const StudentRequest = () => {
       );
       // console.log(dataObj);
       alert("Request created Successfully");
-      // alert("Request created Successfully");
-      //   dataObj.reqid = newID;
       clear();
     } catch {}
   };
@@ -229,7 +227,7 @@ const StudentRequest = () => {
             <button
               type="button"
               className="btn btn-primary create"
-              onClick={handleFeedback}
+              onClick={handleCreate}
             >
               Create
             </button>

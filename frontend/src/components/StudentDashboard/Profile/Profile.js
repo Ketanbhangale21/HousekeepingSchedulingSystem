@@ -28,7 +28,7 @@ const Profile = () => {
   };
 
   const handleUpdate = async () => {
-    console.log(selectedStudent.stdid);
+    // console.log(selectedStudent.stdid);
     setEditable(!editable);
     const updatedStudent = {
       ...selectedStudent,
@@ -60,7 +60,6 @@ const Profile = () => {
   };
 
   const editSelected = () => {
-    // setStudentDetails(false);
     setEditable(true);
   };
 
