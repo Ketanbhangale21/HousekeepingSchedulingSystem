@@ -53,12 +53,13 @@ const FeedbackForm = () => {
               sethousekeeperName(dataItem.fname + " " + dataItem.lname);
               sethousekeeperID(dataItem.hid);
             });
+          } else {
+            setTimeout(() => {}, 0);
+            sethousekeeperName("ReqNot Completed");
+            sethousekeeperID("ReqNot Completed");
           }
         };
         fetchRequestIds();
-      } else {
-        sethousekeeperName("ReqNot Completed");
-        sethousekeeperID("ReqNot Completed");
       }
     } catch {}
   }, [selectedReqId]);

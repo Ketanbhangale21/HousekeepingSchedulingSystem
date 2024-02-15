@@ -61,17 +61,30 @@ const LoginComponent = () => {
     axios
       .post("http://localhost:3005/api/login", loginData)
       .then((response) => {
-        if (response && response.data.message === "Login successful") {
+        if (response.data.message === "Login successful") {
           console.log("Login successful");
+          console.log(response.data.message);
+          const queryString = location.search;
+          let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
+          if (strReturnUrl === null) {
+            strReturnUrl = "/dashboard";
+          }
+          // Set a dummy token in the session storage
+          let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
+          sessionStorage.setItem("user-token", token);
+          // Navigate to the return URL
+          navigate(strReturnUrl);
           setError(response.data.message);
           // Perform any necessary actions upon successful login
         } else {
-          setError(response.data.error);
+          setError("Invalid email or password");
+          console.log(response.data.error);
           console.error("Login failed:", response.data.error);
           return;
         }
       })
       .catch((error) => {
+        setError(error?.response?.data?.message);
         console.error("Error during login:", error);
       });
 
@@ -84,16 +97,6 @@ const LoginComponent = () => {
     }
 
     // Get the return URL from the location query string
-    const queryString = location.search;
-    let strReturnUrl = new URLSearchParams(queryString).get("returnUrl");
-    if (strReturnUrl === null) {
-      strReturnUrl = "/dashboard";
-    }
-    // Set a dummy token in the session storage
-    let token = "ASJDFJF87ADF8745LK4598SAD7FAJSDF45JSDLFKAS";
-    sessionStorage.setItem("user-token", token);
-    // Navigate to the return URL
-    navigate(strReturnUrl);
   };
 
   // Return the JSX for the login form

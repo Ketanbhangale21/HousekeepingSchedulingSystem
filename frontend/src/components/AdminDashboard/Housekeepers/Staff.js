@@ -8,7 +8,7 @@ const Staff = () => {
   const [details, setDetails] = useState(false);
   const [editable, setEditable] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 7;
+  const recordsPerPage = 6;
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = housekeepers.slice(

@@ -180,3 +180,6 @@
 .heading2 {
   font-weight: bold;
 }
+input::placeholder {
+  color: #009688;
+}

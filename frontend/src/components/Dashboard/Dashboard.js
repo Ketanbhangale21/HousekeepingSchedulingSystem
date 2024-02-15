@@ -18,10 +18,9 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [userEmail, setUseremail] = useState("");
   const [route, setRoute] = useState("dashboard");
-  const [routes, setroutes] = useState("dashboard");
+
   const handleRoutes = async (e) => {
     setRoute("");
-    setroutes(e);
     setTimeout(() => setRoute(e), 0);
   };
   useEffect(() => {
@@ -72,7 +71,7 @@ const Dashboard = () => {
           <div
             onClick={() => handleRoutes("dashboard")}
             className={`sidebar-item ${
-              routes === "dashboard" ? " active1" : ""
+              route === "dashboard" ? " active1" : ""
             }`}
           >
             <i className="bi bi-tv"></i>
@@ -82,7 +81,7 @@ const Dashboard = () => {
             <div>
               <div
                 className={`sidebar-item ${
-                  routes === "studentrequest" ? " active1" : ""
+                  route === "studentrequest" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("studentrequest")}
               >
@@ -90,7 +89,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "studentstatus" ? " active1" : ""
+                  route === "studentstatus" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("studentstatus")}
               >
@@ -98,7 +97,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "profile" ? " active1" : ""
+                  route === "profile" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("profile")}
               >
@@ -106,7 +105,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "studentfeedback" ? " active1" : ""
+                  route === "studentfeedback" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("studentfeedback")}
               >
@@ -118,7 +117,7 @@ const Dashboard = () => {
             <div>
               <div
                 className={`sidebar-item ${
-                  routes === "adminrequest" ? " active1" : ""
+                  route === "adminrequest" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("adminrequest")}
               >
@@ -126,7 +125,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "housekeepers" ? " active1" : ""
+                  route === "housekeepers" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("housekeepers")}
               >
@@ -134,7 +133,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "students" ? " active1" : ""
+                  route === "students" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("students")}
               >
@@ -142,7 +141,7 @@ const Dashboard = () => {
               </div>
               <div
                 className={`sidebar-item ${
-                  routes === "adminfeedback" ? " active1" : ""
+                  route === "adminfeedback" ? " active1" : ""
                 }`}
                 onClick={() => handleRoutes("adminfeedback")}
               >

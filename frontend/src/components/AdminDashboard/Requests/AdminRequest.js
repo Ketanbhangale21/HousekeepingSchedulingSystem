@@ -90,11 +90,12 @@ const AdminRequest = () => {
   return (
     <div className="maincontainer">
       <div className="outercontainer">
-        {/* <h2>Requests</h2> */}
+        <h5>Requests</h5>
         <table className="housekeepers-table">
           <thead>
             <tr>
               <th>Request ID</th>
+              <th>SiD</th>
               <th>Date</th>
               <th>Time</th>
               <th>Requests</th>
@@ -107,6 +108,7 @@ const AdminRequest = () => {
               currentRecords.map((request) => (
                 <tr key={request.reqid}>
                   <td>{request.reqid}</td>
+                  <td>{request.stdid}</td>
                   <td>{request.date}</td>
                   <td>{request.timings}</td>
                   <td>

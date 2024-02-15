@@ -21,7 +21,6 @@ const AddStudent = () => {
   const [answer, setAnswer] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showrePassword, setReShowPassword] = useState(false);
-
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
@@ -36,6 +35,7 @@ const AddStudent = () => {
     }
     fetchData();
   }, []);
+
   const stdidGenerate = async () => {
     return "ST" + Math.floor(100000 + Math.random() * 900000);
   };

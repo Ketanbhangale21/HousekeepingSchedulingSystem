@@ -133,6 +133,7 @@ function ForgotPasswordComponent() {
               id="username"
               name="username"
               value={username}
+              placeholder="Enter your Email Id"
               onChange={(e) => {
                 setUsername(e.target.value);
                 setFieldsEmpty("");
